@@ -11,25 +11,17 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   
-  /* Скроллбар — тонкий и в тему */
   html {
     scrollbar-width: thin;
     scrollbar-color: rgba(167,139,250,0.3) transparent;
   }
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb {
     background: rgba(167,139,250,0.3);
     border-radius: 4px;
-    transition: background 0.2s;
   }
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgba(167,139,250,0.5);
-  }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(167,139,250,0.5); }
   
   body {
     font-family: -apple-system, 'Segoe UI', sans-serif;
@@ -39,6 +31,11 @@
     overflow-x: hidden;
     position: relative;
     -webkit-tap-highlight-color: transparent;
+  }
+  
+  *:focus-visible {
+    outline: 2px solid #a78bfa;
+    outline-offset: 2px;
   }
   
   .stars {
@@ -69,7 +66,7 @@
   
   .header {
     text-align: center;
-    margin-bottom: 48px;
+    margin-bottom: 32px;
   }
   .logo {
     font-size: 14px;
@@ -93,13 +90,54 @@
     font-weight: 300;
   }
   
-  .time-picker {
+  .big-clock {
+    text-align: center;
+    margin: 40px 0;
+  }
+  .clock-time {
+    font-size: clamp(64px, 12vw, 96px);
+    font-weight: 400;
+    color: #fff;
+    letter-spacing: 4px;
+    text-shadow: 0 0 40px rgba(167,139,250,0.3);
+  }
+  
+  .mode-toggle {
+    display: flex;
     background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 24px;
-    padding: 32px;
+    border-radius: 16px;
+    padding: 4px;
+    margin: 0 auto 32px;
+    max-width: 500px;
+    position: relative;
+  }
+  .mode-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: rgba(255,255,255,0.6);
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    z-index: 1;
+  }
+  .mode-btn.active {
+    background: rgba(167,139,250,0.2);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(139,92,246,0.3);
+  }
+  
+  .time-picker {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    border-radius: 0;
+    padding: 16px 0;
     margin-bottom: 32px;
     text-align: center;
   }
@@ -216,6 +254,24 @@
     letter-spacing: 1px;
   }
   
+  .card.highlight {
+    border-color: rgba(34,197,94,0.5);
+    background: linear-gradient(135deg, rgba(34,197,94,0.15), rgba(16,185,129,0.08));
+    animation: pulse 2s ease-in-out infinite;
+  }
+  .card.highlight::after {
+    content: '🔥 ложись сейчас!';
+    position: absolute;
+    top: 12px; right: 12px;
+    font-size: 11px;
+    color: #86efac;
+    letter-spacing: 1px;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(34,197,94,0.3); }
+    50% { box-shadow: 0 0 30px rgba(34,197,94,0.5); }
+  }
+  
   .card-time {
     font-size: 36px;
     font-weight: 200;
@@ -269,31 +325,28 @@
     transform: translateY(-2px);
     box-shadow: 0 12px 32px rgba(139,92,246,0.5);
   }
-  .alarm-btn:active { transform: translateY(0); }
   
-  .now-bar {
-    margin-top: 40px;
-    text-align: center;
-    padding: 16px;
-    background: rgba(255,255,255,0.03);
-    border-radius: 16px;
-    border: 1px solid rgba(255,255,255,0.06);
+  .reminder-btn {
+    display: none;
+    margin: 16px auto 0;
+    padding: 12px 24px;
+    background: rgba(34,197,94,0.2);
+    border: 1px solid rgba(34,197,94,0.3);
+    border-radius: 12px;
+    color: #86efac;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
   }
-  .now-label {
-    font-size: 12px;
-    color: rgba(255,255,255,0.4);
-    letter-spacing: 2px;
-    margin-bottom: 4px;
-  }
-  .now-time {
-    font-size: 20px;
-    font-weight: 300;
-    color: #fff;
+  .reminder-btn.visible { display: block; }
+  .reminder-btn:hover {
+    background: rgba(34,197,94,0.3);
+    border-color: rgba(34,197,94,0.5);
   }
   
   .footer-note {
     text-align: center;
-    margin-top: 32px;
+    margin-top: 40px;
     font-size: 12px;
     color: rgba(255,255,255,0.3);
     line-height: 1.6;
@@ -310,10 +363,8 @@
     align-items: center;
     justify-content: center;
     padding: 24px;
-    animation: fadeIn 0.3s;
   }
   .modal-overlay.visible { display: flex; }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   
   .modal {
     background: linear-gradient(135deg, #1a1a3e 0%, #24243e 100%);
@@ -328,10 +379,6 @@
     font-size: 22px;
     font-weight: 400;
     margin-bottom: 16px;
-    background: linear-gradient(135deg, #fff, #c4b5fd);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
   }
   .modal p {
     color: rgba(255,255,255,0.7);
@@ -371,58 +418,68 @@
     border-radius: 12px;
     font-size: 14px;
     cursor: pointer;
-    transition: all 0.2s;
   }
-  .modal-close:hover { background: rgba(255,255,255,0.15); }
 </style>
 </head>
 <body>
 
 <div class="stars" id="stars"></div>
 
-<div class="container">
-  <div class="header">
-    <div class="logo">🌙 Sleepy</div>
+<div class="container" role="main">
+  <header class="header">
+    <div class="logo" aria-label="Sleepy">🌙 Sleepy</div>
     <h1>Просыпайся легко</h1>
     <p class="subtitle">Цикл сна длится ~90 минут. Ложись так, чтобы проснуться между циклами — и будильник не будет врагом.</p>
+  </header>
+
+  <div class="big-clock" aria-live="polite">
+    <div class="clock-time" id="bigClock">—</div>
   </div>
 
-  <div class="time-picker">
-    <div class="time-label">Я хочу проснуться в</div>
-    <div class="time-display">
-      <input type="text" inputmode="numeric" pattern="[0-9]*" id="hours" class="time-input" maxlength="2" value="07">
-      <span class="time-sep">:</span>
-      <input type="text" inputmode="numeric" pattern="[0-9]*" id="minutes" class="time-input" maxlength="2" value="00">
+  <div class="mode-toggle" role="tablist" aria-label="Выбор режима">
+    <button class="mode-btn active" id="modeWake" role="tab" aria-selected="true" aria-controls="panelWake">
+      Хочу проснуться в
+    </button>
+    <button class="mode-btn" id="modeSleep" role="tab" aria-selected="false" aria-controls="panelSleep">
+      Ложусь сейчас
+    </button>
+  </div>
+
+  <div id="panelWake" role="tabpanel" aria-labelledby="modeWake">
+    <div class="time-picker">
+      <div class="time-display">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" id="hours" class="time-input" maxlength="2" value="07" aria-label="Часы пробуждения">
+        <span class="time-sep" aria-hidden="true">:</span>
+        <input type="text" inputmode="numeric" pattern="[0-9]*" id="minutes" class="time-input" maxlength="2" value="00" aria-label="Минуты пробуждения">
+      </div>
+      <div class="presets" role="group" aria-label="Быстрый выбор времени">
+        <button class="preset" data-h="6" data-m="0">6:00</button>
+        <button class="preset" data-h="6" data-m="30">6:30</button>
+        <button class="preset" data-h="7" data-m="0">7:00</button>
+        <button class="preset" data-h="7" data-m="30">7:30</button>
+        <button class="preset" data-h="8" data-m="0">8:00</button>
+        <button class="preset" data-h="9" data-m="0">9:00</button>
+      </div>
     </div>
-    <div class="presets">
-      <button class="preset" data-h="6" data-m="0">6:00</button>
-      <button class="preset" data-h="6" data-m="30">6:30</button>
-      <button class="preset" data-h="7" data-m="0">7:00</button>
-      <button class="preset" data-h="7" data-m="30">7:30</button>
-      <button class="preset" data-h="8" data-m="0">8:00</button>
-      <button class="preset" data-h="9" data-m="0">9:00</button>
-    </div>
   </div>
 
-  <div class="options-title">Варианты, когда лечь</div>
-  <div class="options" id="options"></div>
+  <div id="panelSleep" role="tabpanel" aria-labelledby="modeSleep" hidden></div>
 
-  <button class="alarm-btn" id="alarmBtn">⏰ Поставить будильник</button>
+  <div class="options-title" id="optionsTitle">Варианты, когда лечь</div>
+  <div class="options" id="options" role="list"></div>
 
-  <div class="now-bar">
-    <div class="now-label">СЕЙЧАС</div>
-    <div class="now-time" id="now">—</div>
-  </div>
+  <button class="alarm-btn" id="alarmBtn" aria-label="Поставить будильник">⏰ Поставить будильник</button>
+  <button class="reminder-btn" id="reminderBtn" aria-label="Установить напоминание">🔔 Напомнить, когда пора ложиться</button>
 
-  <div class="footer-note">
+  <footer class="footer-note">
     +15 минут закладываем на засыпание · 5–6 циклов = 7.5–9 часов сна<br>
     Если просыпаешься в конце цикла — голова свежая, а не ватная
-  </div>
+  </footer>
 </div>
 
-<div class="modal-overlay" id="modal">
+<div class="modal-overlay" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal">
-    <h3>Поставь будильник вручную</h3>
+    <h3 id="modalTitle">Поставь будильник вручную</h3>
     <p>На iPhone нет прямого доступа к системным часам. Но это быстро:</p>
     <div class="modal-steps">
       <div><span class="num">1</span>Открой приложение <b>Часы</b></div>
@@ -469,6 +526,34 @@
   appleIcon.href = iconDataUri;
   document.head.appendChild(appleIcon);
 
+  // Service Worker
+  const swCode = `
+    const CACHE_NAME = 'sleepy-v1';
+    const urlsToCache = ['/'];
+    
+    self.addEventListener('install', event => {
+      event.waitUntil(
+        caches.open(CACHE_NAME)
+          .then(cache => cache.addAll(urlsToCache))
+      );
+    });
+    
+    self.addEventListener('fetch', event => {
+      event.respondWith(
+        caches.match(event.request)
+          .then(response => response || fetch(event.request))
+      );
+    });
+  `;
+  const swBlob = new Blob([swCode], { type: 'application/javascript' });
+  const swUrl = URL.createObjectURL(swBlob);
+  
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register(swUrl).catch(err => {
+      console.log('SW registration failed:', err);
+    });
+  }
+
   // Звёзды
   const starsEl = document.getElementById('stars');
   for (let i = 0; i < 80; i++) {
@@ -487,16 +572,24 @@
   const hoursInput = document.getElementById('hours');
   const minutesInput = document.getElementById('minutes');
   const optionsEl = document.getElementById('options');
-  const nowEl = document.getElementById('now');
+  const optionsTitle = document.getElementById('optionsTitle');
+  const bigClock = document.getElementById('bigClock');
   const alarmBtn = document.getElementById('alarmBtn');
+  const reminderBtn = document.getElementById('reminderBtn');
   const modal = document.getElementById('modal');
   const modalClose = document.getElementById('modalClose');
+  const modeWake = document.getElementById('modeWake');
+  const modeSleep = document.getElementById('modeSleep');
+  const panelWake = document.getElementById('panelWake');
+  const panelSleep = document.getElementById('panelSleep');
 
+  let currentMode = 'wake';
   let currentWakeTime = { h: 7, m: 0 };
+  let reminderTimeout = null;
 
   function pad(n) { return n.toString().padStart(2, '0'); }
 
-  function calcOptions(wakeH, wakeM) {
+  function calcBedOptions(wakeH, wakeM) {
     const wakeTotal = wakeH * 60 + wakeM;
     const results = [];
     
@@ -532,27 +625,92 @@
       
       results.push({
         cycles, bedH, bedM, sleepH, sleepM, rating, desc,
-        bedStr: pad(bedH) + ':' + pad(bedM)
+        timeStr: pad(bedH) + ':' + pad(bedM),
+        timeTotal: bedH * 60 + bedM
       });
     }
     
-    results.sort((a, b) => {
-      const order = { best: 0, good: 1, ok: 2, low: 3 };
-      return order[a.rating] - order[b.rating];
-    });
+    results.sort((a, b) => b.cycles - a.cycles);
     
     return results;
   }
 
+  function calcWakeOptions() {
+    const now = new Date();
+    const nowTotal = now.getHours() * 60 + now.getMinutes() + FALL_ASLEEP_MIN;
+    const results = [];
+    
+    for (let cycles = 3; cycles <= 7; cycles++) {
+      const wakeTime = nowTotal + cycles * CYCLE_MIN;
+      let wake = ((wakeTime % (24 * 60)) + 24 * 60) % (24 * 60);
+      const wakeH = Math.floor(wake / 60);
+      const wakeM = wake % 60;
+      
+      const totalSleep = cycles * CYCLE_MIN;
+      const sleepH = Math.floor(totalSleep / 60);
+      const sleepM = totalSleep % 60;
+      
+      let rating, desc;
+      if (cycles === 6) {
+        rating = 'best';
+        desc = 'Золотой стандарт. 9 часов — проснёшься бодрым и выспавшимся.';
+      } else if (cycles === 5) {
+        rating = 'good';
+        desc = 'Оптимально для большинства. 7.5 часов — классика.';
+      } else if (cycles === 4) {
+        rating = 'ok';
+        desc = 'Минимум для взрослого. Если совсем дедлайн.';
+      } else if (cycles === 7) {
+        rating = 'good';
+        desc = 'Для тех, кто любит поспать подольше. 10.5 часов.';
+      } else {
+        rating = 'low';
+        desc = 'Маловато. Только если это разовая история.';
+      }
+      
+      results.push({
+        cycles, wakeH, wakeM, sleepH, sleepM, rating, desc,
+        timeStr: pad(wakeH) + ':' + pad(wakeM),
+        timeTotal: wakeH * 60 + wakeM
+      });
+    }
+    
+    results.sort((a, b) => b.cycles - a.cycles);
+    
+    return results;
+  }
+
+  function highlightBestOption(options) {
+    const now = new Date();
+    const nowTotal = now.getHours() * 60 + now.getMinutes();
+    
+    options.forEach(opt => {
+      const diff = Math.abs(opt.timeTotal - nowTotal);
+      if (diff <= 30) {
+        opt.highlight = true;
+      }
+    });
+  }
+
   function render() {
-    const h = parseInt(hoursInput.value) || 0;
-    const m = parseInt(minutesInput.value) || 0;
-    currentWakeTime = { h, m };
-    const options = calcOptions(h, m);
+    let options;
+    
+    if (currentMode === 'wake') {
+      const h = parseInt(hoursInput.value) || 0;
+      const m = parseInt(minutesInput.value) || 0;
+      currentWakeTime = { h, m };
+      options = calcBedOptions(h, m);
+      optionsTitle.textContent = 'Варианты, когда лечь';
+    } else {
+      options = calcWakeOptions();
+      optionsTitle.textContent = 'Варианты, когда проснуться';
+    }
+    
+    highlightBestOption(options);
     
     optionsEl.innerHTML = options.map(o => `
-      <div class="card ${o.rating === 'best' ? 'best' : ''}">
-        <div class="card-time">${o.bedStr}</div>
+      <div class="card ${o.rating === 'best' ? 'best' : ''} ${o.highlight ? 'highlight' : ''}" role="listitem">
+        <div class="card-time">${o.timeStr}</div>
         <div class="card-cycles">${o.cycles} циклов сна</div>
         <div class="card-duration">💤 ${o.sleepH}ч ${o.sleepM}мин</div>
         <div class="card-desc">${o.desc}</div>
@@ -560,20 +718,47 @@
     `).join('');
   }
 
-  function updateNow() {
+  function updateClock() {
     const d = new Date();
-    nowEl.textContent = pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+    bigClock.textContent = pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
   }
 
-  // Валидация инпутов
+  function switchMode(mode) {
+    currentMode = mode;
+    
+    if (mode === 'wake') {
+      modeWake.classList.add('active');
+      modeWake.setAttribute('aria-selected', 'true');
+      modeSleep.classList.remove('active');
+      modeSleep.setAttribute('aria-selected', 'false');
+      panelWake.hidden = false;
+      panelSleep.hidden = true;
+    } else {
+      modeSleep.classList.add('active');
+      modeSleep.setAttribute('aria-selected', 'true');
+      modeWake.classList.remove('active');
+      modeWake.setAttribute('aria-selected', 'false');
+      panelSleep.hidden = false;
+      panelWake.hidden = true;
+    }
+    
+    render();
+    showAlarmBtn();
+    if ('Notification' in window && mode === 'wake') {
+      reminderBtn.classList.add('visible');
+    } else {
+      reminderBtn.classList.remove('visible');
+    }
+  }
+
+  modeWake.addEventListener('click', () => switchMode('wake'));
+  modeSleep.addEventListener('click', () => switchMode('sleep'));
+
   function validateInput(input, max) {
-    // Убираем всё кроме цифр
     input.value = input.value.replace(/[^0-9]/g, '');
-    // Ограничиваем длину
     if (input.value.length > 2) {
       input.value = input.value.slice(0, 2);
     }
-    // Ограничиваем диапазон
     const val = parseInt(input.value);
     if (val > max) {
       input.value = pad(max);
@@ -581,7 +766,6 @@
   }
 
   function formatInput(input) {
-    // При потере фокуса форматируем ведущим нулём
     const val = parseInt(input.value) || 0;
     input.value = pad(val);
   }
@@ -612,16 +796,17 @@
     });
   });
 
-  // Платформа и кнопка будильника
   const ua = navigator.userAgent || '';
   const isAndroid = /Android/i.test(ua);
   const isIOS = /iPhone|iPad|iPod/i.test(ua);
   const isMobile = isAndroid || isIOS;
   
   function showAlarmBtn() {
-    if (isMobile) {
+    if (isMobile && currentMode === 'wake') {
       alarmBtn.classList.add('visible');
       alarmBtn.textContent = isAndroid ? '⏰ Открыть системные Часы' : '⏰ Как поставить будильник';
+    } else {
+      alarmBtn.classList.remove('visible');
     }
   }
 
@@ -647,10 +832,77 @@
     if (e.target === modal) modal.classList.remove('visible');
   });
 
+  function requestNotificationPermission() {
+    if ('Notification' in window && Notification.permission === 'default') {
+      Notification.requestPermission();
+    }
+  }
+
+  function setReminder(bedTimeTotal) {
+    const now = new Date();
+    const nowTotal = now.getHours() * 60 + now.getMinutes();
+    let diff = bedTimeTotal - nowTotal;
+    
+    if (diff < 0) diff += 24 * 60;
+    if (diff === 0) diff = 1;
+    
+    const reminderTime = 15;
+    const delay = (diff - reminderTime) * 60 * 1000;
+    
+    if (delay < 0) {
+      alert('Уже пора ложиться!');
+      return;
+    }
+    
+    if (reminderTimeout) {
+      clearTimeout(reminderTimeout);
+    }
+    
+    reminderTimeout = setTimeout(() => {
+      if ('Notification' in window && Notification.permission === 'granted') {
+        new Notification('🌙 Пора ложиться!', {
+          body: 'Через 15 минут идеальное время для отхода ко сну',
+          icon: iconDataUri,
+          badge: iconDataUri
+        });
+      }
+    }, delay);
+    
+    const reminderH = Math.floor(bedTimeTotal / 60);
+    const reminderM = bedTimeTotal % 60;
+    alert(`Напоминание установлено на ${pad(reminderH)}:${pad(reminderM)}`);
+  }
+
+  reminderBtn.addEventListener('click', () => {
+    if ('Notification' in window) {
+      if (Notification.permission === 'granted') {
+        const bestOption = calcBedOptions(currentWakeTime.h, currentWakeTime.m)[0];
+        setReminder(bestOption.timeTotal);
+      } else if (Notification.permission !== 'denied') {
+        Notification.requestPermission().then(permission => {
+          if (permission === 'granted') {
+            const bestOption = calcBedOptions(currentWakeTime.h, currentWakeTime.m)[0];
+            setReminder(bestOption.timeTotal);
+          }
+        });
+      } else {
+        alert('Разрешите уведомления в настройках браузера');
+      }
+    } else {
+      alert('Ваш браузер не поддерживает уведомления');
+    }
+  });
+
+  if ('Notification' in window && currentMode === 'wake') {
+    reminderBtn.classList.add('visible');
+    requestNotificationPermission();
+  }
+
   render();
-  updateNow();
+  updateClock();
   showAlarmBtn();
-  setInterval(updateNow, 1000);
+  setInterval(updateClock, 1000);
+  setInterval(render, 60000);
 </script>
 
 </body>
