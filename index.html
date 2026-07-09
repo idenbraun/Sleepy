@@ -419,6 +419,76 @@
     font-size: 14px;
     cursor: pointer;
   }
+  
+  /* Мобильная версия */
+  @media (max-width: 600px) {
+    .container {
+      padding: 40px 16px 60px;
+    }
+    
+    .header {
+      margin-bottom: 24px;
+    }
+    
+    .big-clock {
+      margin: 24px 0;
+    }
+    
+    .mode-toggle {
+      margin-bottom: 24px;
+    }
+    
+    /* Пресеты: 3 в ряд */
+    .presets {
+      gap: 8px;
+    }
+    .preset {
+      flex: 0 0 calc(33.333% - 6px);
+      padding: 10px 8px;
+      font-size: 14px;
+    }
+    
+    /* Карточки: 3 в ряд, компактные */
+    .options {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .card {
+      padding: 12px;
+      border-radius: 12px;
+    }
+    .card-time {
+      font-size: 24px;
+      margin-bottom: 2px;
+    }
+    .card-cycles {
+      font-size: 10px;
+      margin-bottom: 8px;
+    }
+    .card-duration {
+      font-size: 10px;
+      padding: 3px 8px;
+    }
+    .card-desc {
+      display: none;
+    }
+    .card.best::after,
+    .card.highlight::after {
+      font-size: 9px;
+      top: 8px;
+      right: 8px;
+    }
+    
+    .options-title {
+      margin-bottom: 12px;
+      font-size: 11px;
+    }
+    
+    .footer-note {
+      margin-top: 24px;
+      font-size: 11px;
+    }
+  }
 </style>
 </head>
 <body>
