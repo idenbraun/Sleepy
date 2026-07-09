@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1a1a3e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Sleepy">
+<title>Sleepy — таймер сна</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  /* Скроллбар — тонкий и в тему */
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(167,139,250,0.3) transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(167,139,250,0.3);
+    border-radius: 4px;
+    transition: background 0.2s;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(167,139,250,0.5);
+  }
+  
+  body {
+    font-family: -apple-system, 'Segoe UI', sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f0c29 0%, #1a1a3e 50%, #24243e 100%);
+    color: #fff;
+    overflow-x: hidden;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .star {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle 3s infinite;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 1; }
+  }
+  
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 24px 80px;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .logo {
+    font-size: 14px;
+    letter-spacing: 4px;
+    color: #a78bfa;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-size: clamp(36px, 6vw, 56px);
+    font-weight: 300;
+    background: linear-gradient(135deg, #fff 0%, #c4b5fd 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+  }
+  .subtitle {
+    color: rgba(255,255,255,0.6);
+    font-size: 16px;
+    font-weight: 300;
+  }
+  
+  .time-picker {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 24px;
+    padding: 32px;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  .time-label {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+  .time-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .time-input {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 16px 24px;
+    font-size: 48px;
+    font-weight: 200;
+    color: #fff;
+    width: 130px;
+    text-align: center;
+    outline: none;
+    transition: all 0.3s;
+    caret-color: #a78bfa;
+    font-family: inherit;
+  }
+  .time-input:focus {
+    border-color: #a78bfa;
+    box-shadow: 0 0 20px rgba(167,139,250,0.3);
+  }
+  .time-sep {
+    font-size: 48px;
+    font-weight: 200;
+    color: rgba(255,255,255,0.4);
+  }
+  
+  .presets {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .preset {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.7);
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .preset:hover {
+    background: rgba(167,139,250,0.2);
+    border-color: #a78bfa;
+    color: #fff;
+  }
+  
+  .options-title {
+    text-align: center;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .card {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 24px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent, rgba(167,139,250,0.1));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(167,139,250,0.4);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  }
+  .card:hover::before { opacity: 1; }
+  
+  .card.best {
+    border-color: rgba(167,139,250,0.3);
+    background: linear-gradient(135deg, rgba(167,139,250,0.1), rgba(139,92,246,0.05));
+  }
+  .card.best::after {
+    content: '✨ идеально';
+    position: absolute;
+    top: 12px; right: 12px;
+    font-size: 11px;
+    color: #c4b5fd;
+    letter-spacing: 1px;
+  }
+  
+  .card-time {
+    font-size: 36px;
+    font-weight: 200;
+    margin-bottom: 4px;
+    position: relative;
+    z-index: 1;
+  }
+  .card-cycles {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .card-duration {
+    display: inline-block;
+    background: rgba(255,255,255,0.08);
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+    position: relative;
+    z-index: 1;
+  }
+  .card-desc {
+    margin-top: 12px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .alarm-btn {
+    display: none;
+    margin: 32px auto 0;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+    border: none;
+    border-radius: 16px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 8px 24px rgba(139,92,246,0.4);
+  }
+  .alarm-btn.visible { display: block; }
+  .alarm-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(139,92,246,0.5);
+  }
+  .alarm-btn:active { transform: translateY(0); }
+  
+  .now-bar {
+    margin-top: 40px;
+    text-align: center;
+    padding: 16px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .now-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .now-time {
+    font-size: 20px;
+    font-weight: 300;
+    color: #fff;
+  }
+  
+  .footer-note {
+    text-align: center;
+    margin-top: 32px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    line-height: 1.6;
+  }
+  
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    animation: fadeIn 0.3s;
+  }
+  .modal-overlay.visible { display: flex; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  
+  .modal {
+    background: linear-gradient(135deg, #1a1a3e 0%, #24243e 100%);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 24px;
+    padding: 32px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+  }
+  .modal h3 {
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #fff, #c4b5fd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .modal p {
+    color: rgba(255,255,255,0.7);
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .modal-steps {
+    text-align: left;
+    background: rgba(0,0,0,0.3);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+  }
+  .modal-steps div {
+    padding: 6px 0;
+    color: rgba(255,255,255,0.8);
+    font-size: 14px;
+  }
+  .modal-steps .num {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    background: #a78bfa;
+    border-radius: 50%;
+    font-size: 12px;
+    color: #fff;
+    margin-right: 10px;
+  }
+  .modal-close {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #fff;
+    padding: 12px 32px;
+    border-radius: 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .modal-close:hover { background: rgba(255,255,255,0.15); }
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+
+<div class="container">
+  <div class="header">
+    <div class="logo">🌙 Sleepy</div>
+    <h1>Просыпайся легко</h1>
+    <p class="subtitle">Цикл сна длится ~90 минут. Ложись так, чтобы проснуться между циклами — и будильник не будет врагом.</p>
+  </div>
+
+  <div class="time-picker">
+    <div class="time-label">Я хочу проснуться в</div>
+    <div class="time-display">
+      <input type="text" inputmode="numeric" pattern="[0-9]*" id="hours" class="time-input" maxlength="2" value="07">
+      <span class="time-sep">:</span>
+      <input type="text" inputmode="numeric" pattern="[0-9]*" id="minutes" class="time-input" maxlength="2" value="00">
+    </div>
+    <div class="presets">
+      <button class="preset" data-h="6" data-m="0">6:00</button>
+      <button class="preset" data-h="6" data-m="30">6:30</button>
+      <button class="preset" data-h="7" data-m="0">7:00</button>
+      <button class="preset" data-h="7" data-m="30">7:30</button>
+      <button class="preset" data-h="8" data-m="0">8:00</button>
+      <button class="preset" data-h="9" data-m="0">9:00</button>
+    </div>
+  </div>
+
+  <div class="options-title">Варианты, когда лечь</div>
+  <div class="options" id="options"></div>
+
+  <button class="alarm-btn" id="alarmBtn">⏰ Поставить будильник</button>
+
+  <div class="now-bar">
+    <div class="now-label">СЕЙЧАС</div>
+    <div class="now-time" id="now">—</div>
+  </div>
+
+  <div class="footer-note">
+    +15 минут закладываем на засыпание · 5–6 циклов = 7.5–9 часов сна<br>
+    Если просыпаешься в конце цикла — голова свежая, а не ватная
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h3>Поставь будильник вручную</h3>
+    <p>На iPhone нет прямого доступа к системным часам. Но это быстро:</p>
+    <div class="modal-steps">
+      <div><span class="num">1</span>Открой приложение <b>Часы</b></div>
+      <div><span class="num">2</span>Перейди во вкладку <b>Будильник</b></div>
+      <div><span class="num">3</span>Нажми <b>+</b> и поставь нужное время</div>
+    </div>
+    <button class="modal-close" id="modalClose">Понятно</button>
+  </div>
+</div>
+
+<script>
+  // PWA манифест
+  const iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
+    <rect width="192" height="192" rx="40" fill="#1a1a3e"/>
+    <path d="M120 96 A44 44 0 1 1 96 52 A36 36 0 0 0 120 96Z" fill="#c4b5fd"/>
+    <circle cx="140" cy="60" r="3" fill="#fff" opacity="0.8"/>
+    <circle cx="155" cy="85" r="2" fill="#fff" opacity="0.6"/>
+    <circle cx="50" cy="140" r="2" fill="#fff" opacity="0.7"/>
+  </svg>`;
+  const iconDataUri = 'data:image/svg+xml;base64,' + btoa(iconSvg);
+  
+  const manifest = {
+    name: "Sleepy — таймер сна",
+    short_name: "Sleepy",
+    description: "Просыпайся в правильной фазе сна",
+    start_url: ".",
+    display: "standalone",
+    orientation: "portrait",
+    background_color: "#0f0c29",
+    theme_color: "#1a1a3e",
+    icons: [
+      { src: iconDataUri, sizes: "192x192", type: "image/svg+xml", purpose: "any maskable" },
+      { src: iconDataUri, sizes: "512x512", type: "image/svg+xml", purpose: "any maskable" }
+    ]
+  };
+  const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+  const manifestLink = document.createElement('link');
+  manifestLink.rel = 'manifest';
+  manifestLink.href = URL.createObjectURL(manifestBlob);
+  document.head.appendChild(manifestLink);
+  
+  const appleIcon = document.createElement('link');
+  appleIcon.rel = 'apple-touch-icon';
+  appleIcon.href = iconDataUri;
+  document.head.appendChild(appleIcon);
+
+  // Звёзды
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 80; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 100 + '%';
+    s.style.animationDelay = Math.random() * 3 + 's';
+    s.style.opacity = Math.random();
+    starsEl.appendChild(s);
+  }
+
+  const FALL_ASLEEP_MIN = 15;
+  const CYCLE_MIN = 90;
+
+  const hoursInput = document.getElementById('hours');
+  const minutesInput = document.getElementById('minutes');
+  const optionsEl = document.getElementById('options');
+  const nowEl = document.getElementById('now');
+  const alarmBtn = document.getElementById('alarmBtn');
+  const modal = document.getElementById('modal');
+  const modalClose = document.getElementById('modalClose');
+
+  let currentWakeTime = { h: 7, m: 0 };
+
+  function pad(n) { return n.toString().padStart(2, '0'); }
+
+  function calcOptions(wakeH, wakeM) {
+    const wakeTotal = wakeH * 60 + wakeM;
+    const results = [];
+    
+    for (let cycles = 3; cycles <= 7; cycles++) {
+      const sleepStart = wakeTotal - cycles * CYCLE_MIN;
+      const bedTime = sleepStart - FALL_ASLEEP_MIN;
+      
+      let bed = ((bedTime % (24 * 60)) + 24 * 60) % (24 * 60);
+      const bedH = Math.floor(bed / 60);
+      const bedM = bed % 60;
+      
+      const totalSleep = cycles * CYCLE_MIN;
+      const sleepH = Math.floor(totalSleep / 60);
+      const sleepM = totalSleep % 60;
+      
+      let rating, desc;
+      if (cycles === 6) {
+        rating = 'best';
+        desc = 'Золотой стандарт. 9 часов — проснёшься бодрым и выспавшимся.';
+      } else if (cycles === 5) {
+        rating = 'good';
+        desc = 'Оптимально для большинства. 7.5 часов — классика.';
+      } else if (cycles === 4) {
+        rating = 'ok';
+        desc = 'Минимум для взрослого. Если совсем дедлайн.';
+      } else if (cycles === 7) {
+        rating = 'good';
+        desc = 'Для тех, кто любит поспать подольше. 10.5 часов.';
+      } else {
+        rating = 'low';
+        desc = 'Маловато. Только если это разовая история.';
+      }
+      
+      results.push({
+        cycles, bedH, bedM, sleepH, sleepM, rating, desc,
+        bedStr: pad(bedH) + ':' + pad(bedM)
+      });
+    }
+    
+    results.sort((a, b) => {
+      const order = { best: 0, good: 1, ok: 2, low: 3 };
+      return order[a.rating] - order[b.rating];
+    });
+    
+    return results;
+  }
+
+  function render() {
+    const h = parseInt(hoursInput.value) || 0;
+    const m = parseInt(minutesInput.value) || 0;
+    currentWakeTime = { h, m };
+    const options = calcOptions(h, m);
+    
+    optionsEl.innerHTML = options.map(o => `
+      <div class="card ${o.rating === 'best' ? 'best' : ''}">
+        <div class="card-time">${o.bedStr}</div>
+        <div class="card-cycles">${o.cycles} циклов сна</div>
+        <div class="card-duration">💤 ${o.sleepH}ч ${o.sleepM}мин</div>
+        <div class="card-desc">${o.desc}</div>
+      </div>
+    `).join('');
+  }
+
+  function updateNow() {
+    const d = new Date();
+    nowEl.textContent = pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+  }
+
+  // Валидация инпутов
+  function validateInput(input, max) {
+    // Убираем всё кроме цифр
+    input.value = input.value.replace(/[^0-9]/g, '');
+    // Ограничиваем длину
+    if (input.value.length > 2) {
+      input.value = input.value.slice(0, 2);
+    }
+    // Ограничиваем диапазон
+    const val = parseInt(input.value);
+    if (val > max) {
+      input.value = pad(max);
+    }
+  }
+
+  function formatInput(input) {
+    // При потере фокуса форматируем ведущим нулём
+    const val = parseInt(input.value) || 0;
+    input.value = pad(val);
+  }
+
+  hoursInput.addEventListener('input', () => {
+    validateInput(hoursInput, 23);
+    render();
+  });
+  hoursInput.addEventListener('blur', () => {
+    formatInput(hoursInput);
+    render();
+  });
+
+  minutesInput.addEventListener('input', () => {
+    validateInput(minutesInput, 59);
+    render();
+  });
+  minutesInput.addEventListener('blur', () => {
+    formatInput(minutesInput);
+    render();
+  });
+  
+  document.querySelectorAll('.preset').forEach(btn => {
+    btn.addEventListener('click', () => {
+      hoursInput.value = pad(btn.dataset.h);
+      minutesInput.value = pad(btn.dataset.m);
+      render();
+    });
+  });
+
+  // Платформа и кнопка будильника
+  const ua = navigator.userAgent || '';
+  const isAndroid = /Android/i.test(ua);
+  const isIOS = /iPhone|iPad|iPod/i.test(ua);
+  const isMobile = isAndroid || isIOS;
+  
+  function showAlarmBtn() {
+    if (isMobile) {
+      alarmBtn.classList.add('visible');
+      alarmBtn.textContent = isAndroid ? '⏰ Открыть системные Часы' : '⏰ Как поставить будильник';
+    }
+  }
+
+  alarmBtn.addEventListener('click', () => {
+    if (isAndroid) {
+      const h = currentWakeTime.h;
+      const m = currentWakeTime.m;
+      const intentUrl = `intent:#Intent;action=android.intent.action.SET_ALARM;S.android.intent.extra.HOUR=${h};S.android.intent.extra.MINUTES=${m};end`;
+      try {
+        window.location.href = intentUrl;
+      } catch (e) {
+        window.location.href = 'android-app://com.google.android.deskclock/';
+      }
+    } else if (isIOS) {
+      modal.classList.add('visible');
+    }
+  });
+
+  modalClose.addEventListener('click', () => {
+    modal.classList.remove('visible');
+  });
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) modal.classList.remove('visible');
+  });
+
+  render();
+  updateNow();
+  showAlarmBtn();
+  setInterval(updateNow, 1000);
+</script>
+
+</body>
+</html>
