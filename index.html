@@ -8,123 +8,53 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Sleepy</title>
 
-    <!-- Манифест -->
     <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlNsZWVweSIsCiAgInNob3J0X25hbWUiOiAiU2xlZXB5IiwKICAiZGVzY3JpcHRpb24iOiAi0KjRg9C80L3Ri9C5INGC0LDQudC80LXRgCDRgdC90LAiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzBhMGEwYSIsCiAgInRoZW1lX2NvbG9yIjogIiMwYTBhMGEiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWwsJTNDc3ZnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zycgdmlld0JveD0nMCAwIDUxMiA1MTInJTNFJTNDcmVjdCB3aWR0aD0nNTEyJyBoZWlnaHQ9JzUxMicgZmlsbD0nJTIzMGEwYTBhJyByeD0nNjQnLyUzRSUzQ3RleHQgeD0nMjU2JyB5PSczMjAnIGZvbnQtc2l6ZT0nMjUwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmaWxsPSclMjNmZmYnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyUzRSV1MUQ2MzQlMjAlM0MvdGV4dCUzRSUzQy9zdmclM0UiLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiLAogICAgICAicHVycG9zZSI6ICJhbnkgbWFzayBhbnlsYW5nIgogICAgfQogIF0sCiAgIm9yaWVudGF0aW9uIjogInBvcnRyYWl0Igp9">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%230a0a0a' rx='64'/%3E%3Ctext x='256' y='320' font-size='250' text-anchor='middle' fill='%23fff' font-family='sans-serif'%3E🌜%3C/text%3E%3C/svg%3E" type="image/svg+xml">
     <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%230a0a0a' rx='64'/%3E%3Ctext x='256' y='320' font-size='250' text-anchor='middle' fill='%23fff' font-family='sans-serif'%3E🌜%3C/text%3E%3C/svg%3E">
 
     <style>
-        /* ----- CSS-переменные ----- */
         :root {
             --bg: #0a0a0a;
-            --bg-solid: #0a0a0a;
             --text: #e0e0e0;
-            --text-secondary: #5a5a5a;
+            --text-secondary: #6a6a6a;
             --text-muted: #4a4a4a;
-            --text-dim: #6a6a6a;
-            --btn-border: #3a3a3a;
-            --accent: #4a6cf7;
-            --accent-dim: #6a8cff;
-            --accent-glow: rgba(74, 108, 247, 0.6);
+            
+            --accent: #b44aff;
+            --accent-dim: #c87aff;
+            --accent-glow: rgba(180, 74, 255, 0.7);
+            --accent-soft: rgba(180, 74, 255, 0.15);
+            --accent-gradient: linear-gradient(135deg, #b44aff 0%, #e040fb 50%, #7c4dff 100%);
+            
             --footer-text: #3a3a3a;
             --footer-link: #6a6a6a;
             --footer-link-hover: #c0c0c0;
             --footer-border: #181818;
             --number-color: #d4d4d4;
-            --label-color: #6a6a6a;
-            --sidebar-border: #1a1a1a;
-            --toggle-track: #3a3a3a;
-            --warn-bg: #1a1410;
-            --warn-border: #3a2a1a;
-
-            --sleep-card-bg: rgba(255,255,255,0.04);
-            --sleep-card-border: rgba(255,255,255,0.08);
-            --sleep-best-border: rgba(162,155,254,0.3);
-            --sleep-best-bg: rgba(162,155,254,0.1);
-            --sleep-highlight-border: rgba(52,199,89,0.5);
-            --sleep-highlight-bg: rgba(52,199,89,0.15);
-            --sleep-input-bg: rgba(0,0,0,0.3);
-            --sleep-input-border: rgba(255,255,255,0.1);
-            --sleep-reminder-bg: rgba(52,199,89,0.2);
-            --sleep-reminder-border: rgba(52,199,89,0.3);
-            --sleep-reminder-text: #86efac;
-            --sleep-footer-text: rgba(255,255,255,0.3);
-            --sleep-preset-bg: rgba(255,255,255,0.05);
-            --sleep-preset-border: rgba(255,255,255,0.1);
-            --sleep-preset-text: rgba(255,255,255,0.7);
+            
+            --sleep-card-bg: rgba(255,255,255,0.03);
+            --sleep-card-border: rgba(255,255,255,0.06);
+            --sleep-input-bg: rgba(0,0,0,0.4);
+            --sleep-input-border: rgba(255,255,255,0.08);
+            --sleep-reminder-bg: rgba(180, 74, 255, 0.15);
+            --sleep-reminder-border: rgba(180, 74, 255, 0.25);
+            --sleep-reminder-text: #c87aff;
+            --sleep-footer-text: rgba(255,255,255,0.25);
+            --sleep-preset-bg: rgba(255,255,255,0.04);
+            --sleep-preset-border: rgba(255,255,255,0.08);
+            --sleep-preset-text: rgba(255,255,255,0.6);
             --sleep-mode-bg: rgba(255,255,255,0.03);
-            --sleep-mode-border: rgba(255,255,255,0.06);
-            --sleep-mode-active-bg: rgba(167,139,250,0.15);
-            --sleep-mode-text: rgba(255,255,255,0.5);
+            --sleep-mode-active-bg: rgba(180, 74, 255, 0.15);
+            --sleep-mode-text: rgba(255,255,255,0.45);
             --sleep-mode-active-text: #e0e0e0;
-            --sleep-subtitle-text: rgba(255,255,255,0.6);
-            --sleep-title-gradient-from: #fff;
-            --sleep-title-gradient-to: #c4b5fd;
-            --sleep-logo-text: #a78bfa;
-            --sleep-clock-shadow: rgba(167,139,250,0.3);
-            --sleep-duration-bg: rgba(255,255,255,0.08);
-            --sleep-duration-text: rgba(255,255,255,0.7);
-            --sleep-card-desc-text: rgba(255,255,255,0.5);
-            --sleep-card-cycles-text: rgba(255,255,255,0.5);
-            --sleep-options-title-text: rgba(255,255,255,0.5);
-            --sleep-highlight-label: #86efac;
-            --sleep-best-label: #c4b5fd;
-        }
-
-        .light-theme {
-            --bg: #f5f5f5;
-            --bg-solid: #f5f5f5;
-            --text: #1a1a1a;
-            --text-secondary: #777;
-            --text-muted: #888;
-            --text-dim: #555;
-            --btn-border: #ccc;
-            --accent: #4a6cf7;
-            --accent-dim: #6a8cff;
-            --accent-glow: rgba(74, 108, 247, 0.4);
-            --footer-text: #888;
-            --footer-link: #777;
-            --footer-link-hover: #1a1a1a;
-            --footer-border: #e0e0e0;
-            --number-color: #1a1a1a;
-            --label-color: #777;
-            --sidebar-border: #e0e0e0;
-            --toggle-track: #ddd;
-            --warn-bg: #fff8f0;
-            --warn-border: #e0d0b0;
-
-            --sleep-card-bg: rgba(0,0,0,0.03);
-            --sleep-card-border: rgba(0,0,0,0.08);
-            --sleep-best-border: rgba(162,155,254,0.4);
-            --sleep-best-bg: rgba(162,155,254,0.08);
-            --sleep-highlight-border: rgba(52,199,89,0.5);
-            --sleep-highlight-bg: rgba(52,199,89,0.1);
-            --sleep-input-bg: rgba(0,0,0,0.05);
-            --sleep-input-border: rgba(0,0,0,0.12);
-            --sleep-reminder-bg: rgba(52,199,89,0.15);
-            --sleep-reminder-border: rgba(52,199,89,0.3);
-            --sleep-reminder-text: #166534;
-            --sleep-footer-text: rgba(0,0,0,0.4);
-            --sleep-preset-bg: rgba(0,0,0,0.04);
-            --sleep-preset-border: rgba(0,0,0,0.1);
-            --sleep-preset-text: rgba(0,0,0,0.6);
-            --sleep-mode-bg: rgba(0,0,0,0.03);
-            --sleep-mode-border: rgba(0,0,0,0.06);
-            --sleep-mode-active-bg: rgba(167,139,250,0.12);
-            --sleep-mode-text: rgba(0,0,0,0.4);
-            --sleep-mode-active-text: #1a1a1a;
-            --sleep-subtitle-text: rgba(0,0,0,0.5);
-            --sleep-title-gradient-from: #1a1a1a;
-            --sleep-title-gradient-to: #7c3aed;
-            --sleep-logo-text: #7c3aed;
-            --sleep-clock-shadow: rgba(124,58,237,0.2);
-            --sleep-duration-bg: rgba(0,0,0,0.06);
-            --sleep-duration-text: rgba(0,0,0,0.6);
-            --sleep-card-desc-text: rgba(0,0,0,0.5);
-            --sleep-card-cycles-text: rgba(0,0,0,0.4);
-            --sleep-options-title-text: rgba(0,0,0,0.4);
-            --sleep-highlight-label: #16a34a;
-            --sleep-best-label: #7c3aed;
+            --sleep-subtitle-text: rgba(255,255,255,0.5);
+            --sleep-title-gradient-from: #ffffff;
+            --sleep-title-gradient-to: #c87aff;
+            --sleep-logo-text: #b44aff;
+            --sleep-duration-bg: rgba(255,255,255,0.06);
+            --sleep-duration-text: rgba(255,255,255,0.6);
+            --sleep-card-desc-text: rgba(255,255,255,0.4);
+            --sleep-card-cycles-text: rgba(255,255,255,0.4);
+            --sleep-options-title-text: rgba(255,255,255,0.4);
         }
 
         * {
@@ -137,8 +67,7 @@
             height: 100%;
             min-height: 100vh;
             min-height: 100dvh;
-            background: var(--bg-solid);
-            transition: background 0.5s ease;
+            background: var(--bg);
         }
 
         body {
@@ -154,10 +83,28 @@
             align-items: center;
             justify-content: flex-start;
             background: transparent;
-            transition: color 0.5s ease;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+        }
+
+        .stars-container {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .star {
+            position: absolute;
+            border-radius: 50%;
+            background: #fff;
+            animation: twinkle var(--duration) ease-in-out infinite;
+            animation-delay: var(--delay);
+            opacity: 0;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.15; }
+            50% { opacity: 0.7; }
         }
 
         .app-wrapper {
@@ -165,10 +112,11 @@
             flex-direction: column;
             flex: 1 0 auto;
             width: 100%;
-            max-width: 700px;
+            max-width: 900px;
             min-height: 100vh;
             min-height: 100dvh;
-            background: transparent;
+            position: relative;
+            z-index: 1;
         }
 
         .page-content {
@@ -191,7 +139,16 @@
             gap: 2rem;
         }
 
-        /* ----- Футер ----- */
+        /* Узкий контейнер для карточек и всего остального */
+        .narrow-container {
+            width: 100%;
+            max-width: 700px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
         .footer {
             flex-shrink: 0;
             width: 100%;
@@ -203,9 +160,7 @@
             font-size: 0.75rem;
             letter-spacing: 0.15em;
             padding: 1.8rem 1rem 3rem;
-            background: transparent;
             border-top: 1px solid var(--footer-border);
-            transition: color 0.5s ease, border-color 0.5s ease;
             margin-top: auto;
         }
 
@@ -232,179 +187,10 @@
             text-decoration-color: currentColor;
         }
 
-        /* ----- САЙДБАР ----- */
-        .sidebar-toggle {
-            position: fixed;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 8px;
-            height: 48px;
-            background: var(--sidebar-border);
-            border: none;
-            border-radius: 0 4px 4px 0;
-            cursor: pointer;
-            z-index: 25;
-            transition: all 0.3s ease;
-            opacity: 0.5;
-        }
-
-        .sidebar-toggle:hover {
-            opacity: 1;
-            width: 10px;
-            background: var(--footer-link);
-        }
-
-        .sidebar-toggle.active {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .sidebar {
-            position: fixed;
-            left: -120px;
-            top: 0;
-            bottom: 0;
-            width: 120px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem 0.5rem;
-            gap: 2rem;
-            border-right: 1px solid var(--sidebar-border);
-            z-index: 20;
-            background: var(--bg);
-            transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1), background 0.5s ease, border-color 0.5s ease;
-        }
-
-        .sidebar.open {
-            left: 0;
-        }
-
-        .sidebar-row {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            width: 100%;
-            justify-content: center;
-        }
-
-        .sidebar-dots {
-            display: flex;
-            gap: 5px;
-            opacity: 0.3;
-            margin-top: auto;
-            margin-bottom: 0.5rem;
-        }
-
-        .sidebar-dots span {
-            width: 3px;
-            height: 3px;
-            border-radius: 50%;
-            background: var(--text-muted);
-        }
-
-        .sidebar-label {
-            font-size: 0.5rem;
-            letter-spacing: 0.2em;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            text-align: center;
-            margin-bottom: -1.2rem;
-            transition: color 0.3s ease;
-        }
-
-        .toggle-track {
-            width: 52px;
-            height: 28px;
-            background: var(--toggle-track);
-            border-radius: 14px;
-            cursor: pointer;
-            position: relative;
-            transition: background 0.3s ease;
-            display: flex;
-            align-items: center;
-        }
-
-        .toggle-thumb {
-            position: absolute;
-            width: 22px;
-            height: 22px;
-            background: #fff;
-            border-radius: 50%;
-            left: 3px;
-            top: 3px;
-            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            line-height: 1;
-        }
-
-        .light-theme .toggle-thumb {
-            transform: translateX(24px);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        .warn-wrapper {
-            margin-top: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .warn-icon {
-            font-size: 1.1rem;
-            cursor: pointer;
-            opacity: 0.5;
-            transition: opacity 0.2s;
-            line-height: 1;
-            display: block;
-            position: relative;
-            z-index: 1;
-        }
-        .warn-icon:hover,
-        .warn-icon.active {
-            opacity: 1;
-        }
-
-        .warn-bubble {
-            position: fixed;
-            background: var(--warn-bg);
-            border: 1px solid var(--warn-border);
-            border-radius: 0.8rem;
-            padding: 0.9rem 1.1rem;
-            width: 260px;
-            max-width: calc(100vw - 2rem);
-            font-size: 0.7rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            letter-spacing: 0.02em;
-            text-align: left;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.25s ease;
-            z-index: 100;
-            box-shadow: 0 12px 32px rgba(0,0,0,0.5);
-            word-wrap: break-word;
-        }
-        .warn-bubble strong {
-            color: var(--text);
-        }
-        .warn-bubble.visible {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        /* ----- ТАЙМЕР СНА ----- */
         .header {
             text-align: center;
             margin-bottom: 0.5rem;
+            width: 100%;
         }
         .logo {
             font-size: 14px;
@@ -412,7 +198,6 @@
             color: var(--sleep-logo-text);
             text-transform: uppercase;
             margin-bottom: 12px;
-            transition: color 0.5s ease;
         }
         h1 {
             font-size: clamp(36px, 6vw, 56px);
@@ -422,18 +207,18 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 12px;
-            transition: all 0.5s ease;
         }
         .subtitle {
             color: var(--sleep-subtitle-text);
-            font-size: 16px;
+            font-size: clamp(13px, 2vw, 16px);
             font-weight: 300;
-            transition: color 0.5s ease;
+            line-height: 1.4;
+            max-width: 100%;
         }
 
         .big-clock {
             text-align: center;
-            margin: 1rem 0;
+            margin: 0.5rem 0;
         }
         .clock-time {
             font-size: clamp(48px, 10vw, 72px);
@@ -443,20 +228,16 @@
             font-feature-settings: "tnum";
             font-variant-numeric: tabular-nums;
             font-family: 'Inter', 'SF Mono', 'JetBrains Mono', monospace;
-            transition: color 0.5s ease;
         }
 
-        /* Переключатель режимов */
         .mode-toggle {
             display: flex;
             background: var(--sleep-mode-bg);
-            border-radius: 12px;
+            border-radius: 14px;
             padding: 4px;
             margin: 0 auto 0.5rem;
             max-width: 500px;
             width: 100%;
-            position: relative;
-            transition: all 0.5s ease;
             gap: 4px;
         }
         .mode-btn {
@@ -465,12 +246,10 @@
             border: none;
             color: var(--sleep-mode-text);
             padding: 10px 20px;
-            border-radius: 10px;
+            border-radius: 11px;
             font-size: 14px;
             cursor: pointer;
             transition: all 0.3s;
-            position: relative;
-            z-index: 1;
             font-family: inherit;
             letter-spacing: 0.02em;
             font-weight: 500;
@@ -479,12 +258,11 @@
         .mode-btn.active {
             background: var(--sleep-mode-active-bg);
             color: var(--sleep-mode-active-text);
+            box-shadow: 0 0 20px rgba(180, 74, 255, 0.2);
         }
 
         .time-picker {
-            border: none;
             padding: 16px 0 8px;
-            margin-bottom: 0;
             text-align: center;
         }
         .time-display {
@@ -510,14 +288,13 @@
             letter-spacing: 0.02em;
         }
         .time-input:focus {
-            border-color: var(--accent-dim);
-            box-shadow: 0 0 20px var(--accent-glow);
+            border-color: var(--accent);
+            box-shadow: 0 0 25px var(--accent-glow);
         }
         .time-sep {
             font-size: 48px;
             font-weight: 200;
             color: var(--text-muted);
-            transition: color 0.5s ease;
         }
 
         .presets {
@@ -540,7 +317,7 @@
         }
         .preset:hover {
             background: var(--sleep-mode-active-bg);
-            border-color: var(--accent-dim);
+            border-color: var(--accent);
             color: var(--text);
         }
 
@@ -550,21 +327,21 @@
             flex-direction: column;
             gap: 1rem;
         }
-
         .options-title {
             text-align: center;
             font-size: 0.7rem;
             letter-spacing: 0.2em;
             color: var(--sleep-options-title-text);
             text-transform: uppercase;
-            transition: color 0.5s ease;
         }
         .options {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 12px;
             width: 100%;
         }
+
+        /* ----- КАРТОЧКИ ----- */
         .card {
             background: var(--sleep-card-bg);
             border: 1px solid var(--sleep-card-border);
@@ -573,51 +350,115 @@
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            overflow: hidden;
+            overflow: visible;
+            animation: cardFadeIn 0.5s ease backwards;
         }
-        .card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, transparent, rgba(167,139,250,0.1));
-            opacity: 0;
-            transition: opacity 0.3s;
+        @keyframes cardFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+        .card:nth-child(1) { animation-delay: 0.05s; }
+        .card:nth-child(2) { animation-delay: 0.1s; }
+        .card:nth-child(3) { animation-delay: 0.15s; }
+        .card:nth-child(4) { animation-delay: 0.2s; }
+        .card:nth-child(5) { animation-delay: 0.25s; }
+
         .card:hover {
             transform: translateY(-4px);
-            border-color: rgba(167,139,250,0.4);
+            border-color: rgba(180, 74, 255, 0.4);
+            box-shadow: 0 8px 32px rgba(180, 74, 255, 0.12);
         }
-        .card:hover::before { opacity: 1; }
 
+        /* Карточка "идеально" — приоритетное свечение */
         .card.best {
-            border-color: var(--sleep-best-border);
-            background: var(--sleep-best-bg);
+            border: 1px solid transparent;
+            background: var(--sleep-card-bg);
+            isolation: isolate;
         }
-        .card.best::after {
-            content: '✨ идеально';
+        .card.best::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 22px;
+            padding: 2px;
+            background: var(--accent-gradient);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 1;
+            animation: borderRotate 4s linear infinite, bestGlow 2s ease-in-out infinite;
+            z-index: -1;
+            pointer-events: none;
+        }
+        @keyframes borderRotate {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+        @keyframes bestGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(180, 74, 255, 0.4), 0 0 30px rgba(180, 74, 255, 0.2); }
+            50% { box-shadow: 0 0 25px rgba(180, 74, 255, 0.7), 0 0 50px rgba(180, 74, 255, 0.4); }
+        }
+        .card.best:hover::before {
+            opacity: 1;
+            animation: borderRotate 2s linear infinite, bestGlow 1.5s ease-in-out infinite;
+        }
+        .card.best .best-badge {
             position: absolute;
             top: 12px; right: 16px;
             font-size: 11px;
-            color: var(--sleep-best-label);
+            color: var(--accent-dim);
             letter-spacing: 1px;
+            z-index: 2;
         }
 
+        /* Карточка "ложись сейчас" */
         .card.highlight {
-            border-color: var(--sleep-highlight-border);
-            background: var(--sleep-highlight-bg);
-            animation: pulse 2s ease-in-out infinite;
+            border-color: rgba(180, 74, 255, 0.5);
+            background: rgba(180, 74, 255, 0.08);
+            box-shadow: 0 0 15px rgba(180, 74, 255, 0.3);
+            animation: glowPulse 2s ease-in-out infinite, cardFadeIn 0.5s ease backwards;
         }
-        .card.highlight::after {
-            content: '🔥 ложись сейчас!';
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 15px rgba(180, 74, 255, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(180, 74, 255, 0.6); }
+        }
+        .card.highlight .highlight-badge {
             position: absolute;
             top: 12px; right: 16px;
             font-size: 11px;
-            color: var(--sleep-highlight-label);
+            color: var(--accent-dim);
             letter-spacing: 1px;
+            z-index: 2;
         }
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 20px rgba(34,197,94,0.3); }
-            50% { box-shadow: 0 0 30px rgba(34,197,94,0.5); }
+
+        /* Когда карточка и best, и highlight — best в приоритете */
+        .card.best.highlight {
+            border: 1px solid transparent;
+            background: var(--sleep-card-bg);
+            box-shadow: none;
+            animation: cardFadeIn 0.5s ease backwards;
+        }
+        .card.best.highlight::before {
+            opacity: 1;
+            animation: borderRotate 2s linear infinite, bestGlowStrong 1.5s ease-in-out infinite;
+        }
+        @keyframes bestGlowStrong {
+            0%, 100% { box-shadow: 0 0 25px rgba(180, 74, 255, 0.6), 0 0 50px rgba(180, 74, 255, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(180, 74, 255, 0.9), 0 0 80px rgba(180, 74, 255, 0.5); }
+        }
+        .card.best.highlight .best-badge {
+            display: block;
+            color: #fff;
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+        .card.best.highlight .highlight-badge {
+            display: none;
         }
 
         .card-time {
@@ -627,7 +468,6 @@
             position: relative;
             z-index: 1;
             color: var(--text);
-            transition: color 0.5s ease;
         }
         .card-cycles {
             font-size: 12px;
@@ -635,7 +475,6 @@
             margin-bottom: 12px;
             position: relative;
             z-index: 1;
-            transition: color 0.5s ease;
         }
         .card-duration {
             display: inline-block;
@@ -646,7 +485,6 @@
             color: var(--sleep-duration-text);
             position: relative;
             z-index: 1;
-            transition: all 0.5s ease;
         }
         .card-desc {
             margin-top: 12px;
@@ -655,7 +493,6 @@
             line-height: 1.5;
             position: relative;
             z-index: 1;
-            transition: color 0.5s ease;
         }
 
         .reminder-btn {
@@ -674,8 +511,9 @@
         }
         .reminder-btn.visible { display: block; }
         .reminder-btn:hover {
-            background: var(--sleep-reminder-border);
-            border-color: var(--sleep-reminder-text);
+            background: rgba(180, 74, 255, 0.22);
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(180, 74, 255, 0.25);
         }
 
         .info-note {
@@ -684,11 +522,9 @@
             color: var(--sleep-footer-text);
             line-height: 1.6;
             letter-spacing: 0.02em;
-            transition: color 0.5s ease;
             padding: 0 0.5rem;
         }
 
-        /* ----- Адаптив ----- */
         @media (max-width: 600px) {
             body {
                 padding: 0.8rem 0.8rem 0 0.8rem;
@@ -700,8 +536,13 @@
                 padding-bottom: 1.5rem;
             }
 
-            .container {
+            .narrow-container {
                 gap: 1.5rem;
+            }
+
+            .subtitle {
+                font-size: 13px;
+                line-height: 1.3;
             }
 
             .clock-time {
@@ -739,6 +580,9 @@
                 padding: 20px 10px 10px;
                 border-radius: 14px;
             }
+            .card.best::before {
+                border-radius: 16px;
+            }
             .card-time {
                 font-size: 20px;
             }
@@ -753,8 +597,8 @@
             .card-desc {
                 display: none;
             }
-            .card.best::after,
-            .card.highlight::after {
+            .card .best-badge,
+            .card .highlight-badge {
                 font-size: 9px;
                 top: 8px;
                 right: 8px;
@@ -778,42 +622,17 @@
                 padding: 8px 10px;
                 font-size: 11px;
             }
+            .subtitle {
+                font-size: 11px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Сайдбар -->
-    <button class="sidebar-toggle" id="sidebarToggle" title="Меню"></button>
+    <div class="stars-container" id="starsContainer"></div>
 
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-label">Тема</div>
-        <div class="sidebar-row">
-            <div class="toggle-track" id="themeToggle">
-                <div class="toggle-thumb">
-                    <span id="toggleIcon">🌙</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="warn-wrapper">
-            <span class="warn-icon" id="warnIcon">⚠️</span>
-            <div class="sidebar-dots">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-    </div>
-
-    <div class="warn-bubble" id="warnBubble">
-        <strong>Цикл сна длится ~90 минут.</strong>
-        Просыпаться нужно между циклами — тогда ты чувствуешь себя отдохнувшим.<br><br>
-        <strong>+15 минут</strong> закладываем на засыпание.<br><br>
-        5–6 циклов = <strong>7.5–9 часов</strong> сна — золотой стандарт для взрослого человека.
-    </div>
-
-    <!-- Основная обёртка -->
     <div class="app-wrapper">
-
         <div class="page-content">
             <div class="container">
 
@@ -823,52 +642,52 @@
                     <p class="subtitle">Цикл сна длится ~90 минут. Ложись так, чтобы проснуться между циклами — и будильник не будет врагом.</p>
                 </header>
 
-                <div class="big-clock" aria-live="polite">
-                    <div class="clock-time" id="bigClock">—</div>
-                </div>
+                <div class="narrow-container">
 
-                <!-- Ввод времени -->
-                <div id="panelWake" role="tabpanel" aria-labelledby="modeWake">
-                    <div class="time-picker">
-                        <div class="time-display">
-                            <input type="text" inputmode="numeric" pattern="[0-9]*" id="hours" class="time-input" maxlength="2" value="07" aria-label="Часы пробуждения">
-                            <span class="time-sep" aria-hidden="true">:</span>
-                            <input type="text" inputmode="numeric" pattern="[0-9]*" id="minutes" class="time-input" maxlength="2" value="00" aria-label="Минуты пробуждения">
-                        </div>
-                        <div class="presets" role="group" aria-label="Быстрый выбор времени">
-                            <button class="preset" data-h="6" data-m="0">6:00</button>
-                            <button class="preset" data-h="6" data-m="30">6:30</button>
-                            <button class="preset" data-h="7" data-m="0">7:00</button>
-                            <button class="preset" data-h="7" data-m="30">7:30</button>
-                            <button class="preset" data-h="8" data-m="0">8:00</button>
-                            <button class="preset" data-h="9" data-m="0">9:00</button>
+                    <div class="big-clock" aria-live="polite">
+                        <div class="clock-time" id="bigClock">—</div>
+                    </div>
+
+                    <div id="panelWake" role="tabpanel" aria-labelledby="modeWakeBtn">
+                        <div class="time-picker">
+                            <div class="time-display">
+                                <input type="text" inputmode="numeric" pattern="[0-9]*" id="hours" class="time-input" maxlength="2" value="07" aria-label="Часы пробуждения">
+                                <span class="time-sep" aria-hidden="true">:</span>
+                                <input type="text" inputmode="numeric" pattern="[0-9]*" id="minutes" class="time-input" maxlength="2" value="00" aria-label="Минуты пробуждения">
+                            </div>
+                            <div class="presets" role="group" aria-label="Быстрый выбор времени">
+                                <button class="preset" data-h="6" data-m="0">6:00</button>
+                                <button class="preset" data-h="6" data-m="30">6:30</button>
+                                <button class="preset" data-h="7" data-m="0">7:00</button>
+                                <button class="preset" data-h="7" data-m="30">7:30</button>
+                                <button class="preset" data-h="8" data-m="0">8:00</button>
+                                <button class="preset" data-h="9" data-m="0">9:00</button>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div id="panelSleep" role="tabpanel" aria-labelledby="modeSleep" hidden></div>
+                    <div id="panelSleep" role="tabpanel" aria-labelledby="modeSleepBtn" hidden></div>
 
-                <!-- Переключатель режимов -->
-                <div class="mode-toggle" role="tablist" aria-label="Выбор режима">
-                    <button class="mode-btn active" id="modeWake" role="tab" aria-selected="true" aria-controls="panelWake">
-                        Хочу проснуться в
-                    </button>
-                    <button class="mode-btn" id="modeSleep" role="tab" aria-selected="false" aria-controls="panelSleep">
-                        Ложусь сейчас
-                    </button>
-                </div>
+                    <div class="mode-toggle" role="tablist" aria-label="Выбор режима">
+                        <button class="mode-btn active" id="modeWakeBtn" role="tab" aria-selected="true" aria-controls="panelWake">
+                            Хочу проснуться в
+                        </button>
+                        <button class="mode-btn" id="modeSleepBtn" role="tab" aria-selected="false" aria-controls="panelSleep">
+                            Ложусь сейчас
+                        </button>
+                    </div>
 
-                <!-- Блок вариантов + кнопка напоминания -->
-                <div class="options-section">
-                    <div class="options-title" id="optionsTitle">Варианты, когда лечь</div>
-                    <div class="options" id="options" role="list"></div>
-                    <button class="reminder-btn" id="reminderBtn" aria-label="Установить напоминание">🔔 Напомнить, когда пора ложиться</button>
-                </div>
+                    <div class="options-section">
+                        <div class="options-title" id="optionsTitle">Варианты, когда лечь</div>
+                        <div class="options" id="options" role="list"></div>
+                        <button class="reminder-btn" id="reminderBtn" aria-label="Установить напоминание">🔔 Напомнить, когда пора ложиться</button>
+                    </div>
 
-                <!-- Информационная заметка -->
-                <div class="info-note">
-                    +15 минут закладываем на засыпание · 5–6 циклов = 7.5–9 часов сна<br>
-                    Если просыпаешься в конце цикла — голова свежая, а не ватная
+                    <div class="info-note">
+                        +15 минут закладываем на засыпание · 5–6 циклов = 7.5–9 часов сна<br>
+                        Если просыпаешься в конце цикла — голова свежая, а не ватная
+                    </div>
+
                 </div>
 
             </div>
@@ -881,116 +700,26 @@
                 <a href="mailto:idenbraun@yandex.ru">idenbraun@yandex.ru</a>
             </div>
         </div>
-
     </div>
 
     <script>
         (function() {
             'use strict';
 
-            // ============================================================
-            // ПРЕДУПРЕЖДЕНИЕ (WARN BUBBLE)
-            // ============================================================
-            const warnIcon = document.getElementById('warnIcon');
-            const warnBubble = document.getElementById('warnBubble');
-            let bubbleVisible = false;
-
-            function positionBubble() {
-                const iconRect = warnIcon.getBoundingClientRect();
-                const bubbleW = warnBubble.offsetWidth;
-                const bubbleH = warnBubble.offsetHeight;
-                const vw = window.innerWidth;
-                const vh = window.innerHeight;
-
-                let left, top;
-
-                if (iconRect.right + bubbleW + 16 < vw) {
-                    left = iconRect.right + 16;
-                } else {
-                    left = Math.max(8, iconRect.left - bubbleW - 16);
-                }
-
-                top = iconRect.top + iconRect.height / 2 - bubbleH / 2;
-                if (top < 8) top = 8;
-                if (top + bubbleH > vh - 8) top = vh - bubbleH - 8;
-
-                warnBubble.style.left = left + 'px';
-                warnBubble.style.top = top + 'px';
+            const starsContainer = document.getElementById('starsContainer');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.setProperty('--duration', (2 + Math.random() * 4) + 's');
+                star.style.setProperty('--delay', Math.random() * 5 + 's');
+                const size = 1 + Math.random() * 2;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                starsContainer.appendChild(star);
             }
 
-            function showBubble() {
-                positionBubble();
-                warnBubble.classList.add('visible');
-                warnIcon.classList.add('active');
-                bubbleVisible = true;
-            }
-
-            function hideBubble() {
-                warnBubble.classList.remove('visible');
-                warnIcon.classList.remove('active');
-                bubbleVisible = false;
-            }
-
-            warnIcon.addEventListener('click', function(e) {
-                e.stopPropagation();
-                if (bubbleVisible) {
-                    hideBubble();
-                } else {
-                    showBubble();
-                }
-            });
-
-            document.addEventListener('click', function(e) {
-                if (bubbleVisible && !warnIcon.contains(e.target) && !warnBubble.contains(e.target)) {
-                    hideBubble();
-                }
-            });
-
-            window.addEventListener('resize', function() {
-                if (bubbleVisible) positionBubble();
-            });
-            window.addEventListener('scroll', function() {
-                if (bubbleVisible) positionBubble();
-            });
-
-            // ============================================================
-            // САЙДБАР И ТЕМА
-            // ============================================================
-            const sidebar = document.getElementById('sidebar');
-            const sidebarToggle = document.getElementById('sidebarToggle');
-            const themeToggle = document.getElementById('themeToggle');
-            const toggleIcon = document.getElementById('toggleIcon');
-
-            sidebarToggle.addEventListener('click', function() {
-                sidebar.classList.toggle('open');
-                sidebarToggle.classList.toggle('active');
-            });
-
-            document.addEventListener('click', function(e) {
-                if (!sidebar.contains(e.target) && e.target !== sidebarToggle) {
-                    sidebar.classList.remove('open');
-                    sidebarToggle.classList.remove('active');
-                }
-            });
-
-            function applyTheme(theme) {
-                var isLight = theme === 'light';
-                document.body.classList.toggle('light-theme', isLight);
-                toggleIcon.textContent = isLight ? '☀️' : '🌙';
-                localStorage.setItem('sleepy-theme', theme);
-            }
-
-            var savedTheme = localStorage.getItem('sleepy-theme') || 'dark';
-            applyTheme(savedTheme);
-
-            themeToggle.addEventListener('click', function() {
-                var isLight = document.body.classList.contains('light-theme');
-                applyTheme(isLight ? 'dark' : 'light');
-            });
-
-            // ============================================================
-            // ТАЙМЕР СНА
-            // ============================================================
             const FALL_ASLEEP_MIN = 15;
             const CYCLE_MIN = 90;
 
@@ -1000,8 +729,8 @@
             const optionsTitle = document.getElementById('optionsTitle');
             const bigClock = document.getElementById('bigClock');
             const reminderBtn = document.getElementById('reminderBtn');
-            const modeWake = document.getElementById('modeWake');
-            const modeSleep = document.getElementById('modeSleep');
+            const modeWakeBtn = document.getElementById('modeWakeBtn');
+            const modeSleepBtn = document.getElementById('modeSleepBtn');
             const panelWake = document.getElementById('panelWake');
             const panelSleep = document.getElementById('panelSleep');
 
@@ -1105,6 +834,7 @@
                 const nowTotal = now.getHours() * 60 + now.getMinutes();
 
                 options.forEach(opt => {
+                    opt.highlight = false;
                     const diff = Math.abs(opt.timeTotal - nowTotal);
                     if (diff <= 30) {
                         opt.highlight = true;
@@ -1128,14 +858,29 @@
 
                 highlightBestOption(options);
 
-                optionsEl.innerHTML = options.map(o => `
-                    <div class="card ${o.rating === 'best' ? 'best' : ''} ${o.highlight ? 'highlight' : ''}" role="listitem">
-                        <div class="card-time">${o.timeStr}</div>
-                        <div class="card-cycles">${o.cycles} циклов сна</div>
-                        <div class="card-duration">💤 ${o.sleepH}ч ${o.sleepM}мин</div>
-                        <div class="card-desc">${o.desc}</div>
-                    </div>
-                `).join('');
+                optionsEl.innerHTML = options.map(o => {
+                    let badgeHTML = '';
+                    const isBest = o.rating === 'best';
+                    const isHighlight = o.highlight;
+
+                    if (isBest && isHighlight) {
+                        badgeHTML = '<span class="best-badge">✨ идеально</span>';
+                    } else if (isBest) {
+                        badgeHTML = '<span class="best-badge">✨ идеально</span>';
+                    } else if (isHighlight) {
+                        badgeHTML = '<span class="highlight-badge">⚡ ложись сейчас!</span>';
+                    }
+
+                    return `
+                        <div class="card ${isBest ? 'best' : ''} ${isHighlight ? 'highlight' : ''}" role="listitem">
+                            ${badgeHTML}
+                            <div class="card-time">${o.timeStr}</div>
+                            <div class="card-cycles">${o.cycles} циклов сна</div>
+                            <div class="card-duration">💤 ${o.sleepH}ч ${o.sleepM}мин</div>
+                            <div class="card-desc">${o.desc}</div>
+                        </div>
+                    `;
+                }).join('');
             }
 
             function updateClock() {
@@ -1147,65 +892,42 @@
                 currentMode = mode;
 
                 if (mode === 'wake') {
-                    modeWake.classList.add('active');
-                    modeWake.setAttribute('aria-selected', 'true');
-                    modeSleep.classList.remove('active');
-                    modeSleep.setAttribute('aria-selected', 'false');
+                    modeWakeBtn.classList.add('active');
+                    modeWakeBtn.setAttribute('aria-selected', 'true');
+                    modeSleepBtn.classList.remove('active');
+                    modeSleepBtn.setAttribute('aria-selected', 'false');
                     panelWake.hidden = false;
                     panelSleep.hidden = true;
                 } else {
-                    modeSleep.classList.add('active');
-                    modeSleep.setAttribute('aria-selected', 'true');
-                    modeWake.classList.remove('active');
-                    modeWake.setAttribute('aria-selected', 'false');
+                    modeSleepBtn.classList.add('active');
+                    modeSleepBtn.setAttribute('aria-selected', 'true');
+                    modeWakeBtn.classList.remove('active');
+                    modeWakeBtn.setAttribute('aria-selected', 'false');
                     panelSleep.hidden = false;
                     panelWake.hidden = true;
                 }
 
                 render();
-                if ('Notification' in window && mode === 'wake') {
-                    reminderBtn.classList.add('visible');
-                } else {
-                    reminderBtn.classList.remove('visible');
-                }
+                reminderBtn.classList.toggle('visible', mode === 'wake' && 'Notification' in window);
             }
 
-            modeWake.addEventListener('click', () => switchMode('wake'));
-            modeSleep.addEventListener('click', () => switchMode('sleep'));
+            modeWakeBtn.addEventListener('click', () => switchMode('wake'));
+            modeSleepBtn.addEventListener('click', () => switchMode('sleep'));
 
             function validateInput(input, max) {
                 input.value = input.value.replace(/[^0-9]/g, '');
-                if (input.value.length > 2) {
-                    input.value = input.value.slice(0, 2);
-                }
-                const val = parseInt(input.value);
-                if (val > max) {
-                    input.value = pad(max);
-                }
+                if (input.value.length > 2) input.value = input.value.slice(0, 2);
+                if (parseInt(input.value) > max) input.value = pad(max);
             }
 
             function formatInput(input) {
-                const val = parseInt(input.value) || 0;
-                input.value = pad(val);
+                input.value = pad(parseInt(input.value) || 0);
             }
 
-            hoursInput.addEventListener('input', () => {
-                validateInput(hoursInput, 23);
-                render();
-            });
-            hoursInput.addEventListener('blur', () => {
-                formatInput(hoursInput);
-                render();
-            });
-
-            minutesInput.addEventListener('input', () => {
-                validateInput(minutesInput, 59);
-                render();
-            });
-            minutesInput.addEventListener('blur', () => {
-                formatInput(minutesInput);
-                render();
-            });
+            hoursInput.addEventListener('input', () => { validateInput(hoursInput, 23); render(); });
+            hoursInput.addEventListener('blur', () => { formatInput(hoursInput); render(); });
+            minutesInput.addEventListener('input', () => { validateInput(minutesInput, 59); render(); });
+            minutesInput.addEventListener('blur', () => { formatInput(minutesInput); render(); });
 
             document.querySelectorAll('.preset').forEach(btn => {
                 btn.addEventListener('click', () => {
@@ -1215,32 +937,17 @@
                 });
             });
 
-            function requestNotificationPermission() {
-                if ('Notification' in window && Notification.permission === 'default') {
-                    Notification.requestPermission();
-                }
-            }
-
             function setReminder(bedTimeTotal) {
                 const now = new Date();
                 const nowTotal = now.getHours() * 60 + now.getMinutes();
                 let diff = bedTimeTotal - nowTotal;
-
                 if (diff < 0) diff += 24 * 60;
                 if (diff === 0) diff = 1;
 
-                const reminderTime = 15;
-                const delay = (diff - reminderTime) * 60 * 1000;
+                const delay = (diff - 15) * 60 * 1000;
+                if (delay < 0) { alert('Уже пора ложиться!'); return; }
 
-                if (delay < 0) {
-                    alert('Уже пора ложиться!');
-                    return;
-                }
-
-                if (reminderTimeout) {
-                    clearTimeout(reminderTimeout);
-                }
-
+                if (reminderTimeout) clearTimeout(reminderTimeout);
                 reminderTimeout = setTimeout(() => {
                     if ('Notification' in window && Notification.permission === 'granted') {
                         new Notification('🌙 Пора ложиться!', {
@@ -1250,41 +957,30 @@
                     }
                 }, delay);
 
-                const reminderH = Math.floor(bedTimeTotal / 60);
-                const reminderM = bedTimeTotal % 60;
-                alert(`Напоминание установлено на ${pad(reminderH)}:${pad(reminderM)}`);
+                alert(`Напоминание установлено на ${pad(Math.floor(bedTimeTotal / 60))}:${pad(bedTimeTotal % 60)}`);
             }
 
             reminderBtn.addEventListener('click', () => {
-                if ('Notification' in window) {
-                    if (Notification.permission === 'granted') {
-                        const bestOption = calcBedOptions(currentWakeTime.h, currentWakeTime.m)[0];
-                        setReminder(bestOption.timeTotal);
-                    } else if (Notification.permission !== 'denied') {
-                        Notification.requestPermission().then(permission => {
-                            if (permission === 'granted') {
-                                const bestOption = calcBedOptions(currentWakeTime.h, currentWakeTime.m)[0];
-                                setReminder(bestOption.timeTotal);
-                            }
-                        });
-                    } else {
-                        alert('Разрешите уведомления в настройках браузера');
-                    }
-                } else {
-                    alert('Ваш браузер не поддерживает уведомления');
-                }
+                if (!('Notification' in window)) { alert('Браузер не поддерживает уведомления'); return; }
+                const trySet = () => {
+                    const bestOption = calcBedOptions(currentWakeTime.h, currentWakeTime.m)[0];
+                    setReminder(bestOption.timeTotal);
+                };
+                if (Notification.permission === 'granted') trySet();
+                else if (Notification.permission !== 'denied') {
+                    Notification.requestPermission().then(p => { if (p === 'granted') trySet(); });
+                } else alert('Разрешите уведомления в настройках браузера');
             });
 
             if ('Notification' in window && currentMode === 'wake') {
                 reminderBtn.classList.add('visible');
-                requestNotificationPermission();
+                if (Notification.permission === 'default') Notification.requestPermission();
             }
 
             render();
             updateClock();
             setInterval(updateClock, 1000);
             setInterval(render, 60000);
-
         })();
     </script>
 </body>
