@@ -112,7 +112,7 @@
             flex-direction: column;
             flex: 1 0 auto;
             width: 100%;
-            max-width: 900px;
+            max-width: 1000px;
             min-height: 100vh;
             min-height: 100dvh;
             position: relative;
@@ -139,10 +139,10 @@
             gap: 2rem;
         }
 
-        /* Узкий контейнер для карточек и всего остального */
+        /* Узкий контейнер для карточек */
         .narrow-container {
             width: 100%;
-            max-width: 700px;
+            max-width: 650px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -375,7 +375,7 @@
             box-shadow: 0 8px 32px rgba(180, 74, 255, 0.12);
         }
 
-        /* Карточка "идеально" — приоритетное свечение */
+        /* Карточка "идеально" */
         .card.best {
             border: 1px solid transparent;
             background: var(--sleep-card-bg);
@@ -408,14 +408,6 @@
             opacity: 1;
             animation: borderRotate 2s linear infinite, bestGlow 1.5s ease-in-out infinite;
         }
-        .card.best .best-badge {
-            position: absolute;
-            top: 12px; right: 16px;
-            font-size: 11px;
-            color: var(--accent-dim);
-            letter-spacing: 1px;
-            z-index: 2;
-        }
 
         /* Карточка "ложись сейчас" */
         .card.highlight {
@@ -428,16 +420,8 @@
             0%, 100% { box-shadow: 0 0 15px rgba(180, 74, 255, 0.3); }
             50% { box-shadow: 0 0 30px rgba(180, 74, 255, 0.6); }
         }
-        .card.highlight .highlight-badge {
-            position: absolute;
-            top: 12px; right: 16px;
-            font-size: 11px;
-            color: var(--accent-dim);
-            letter-spacing: 1px;
-            z-index: 2;
-        }
 
-        /* Когда карточка и best, и highlight — best в приоритете */
+        /* Когда карточка и best, и highlight */
         .card.best.highlight {
             border: 1px solid transparent;
             background: var(--sleep-card-bg);
@@ -452,13 +436,29 @@
             0%, 100% { box-shadow: 0 0 25px rgba(180, 74, 255, 0.6), 0 0 50px rgba(180, 74, 255, 0.3); }
             50% { box-shadow: 0 0 40px rgba(180, 74, 255, 0.9), 0 0 80px rgba(180, 74, 255, 0.5); }
         }
-        .card.best.highlight .best-badge {
-            display: block;
+
+        /* Бейджи */
+        .card-badge {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            font-size: 10px;
+            letter-spacing: 0.5px;
+            z-index: 2;
+            white-space: nowrap;
+            padding: 2px 6px;
+            border-radius: 6px;
+            pointer-events: none;
+        }
+        .badge-best {
+            color: var(--accent-dim);
+        }
+        .badge-highlight {
+            color: var(--accent-dim);
+        }
+        .card.best.highlight .badge-best {
             color: #fff;
             text-shadow: 0 0 10px var(--accent-glow);
-        }
-        .card.best.highlight .highlight-badge {
-            display: none;
         }
 
         .card-time {
@@ -518,11 +518,12 @@
 
         .info-note {
             text-align: center;
-            font-size: 0.75rem;
+            font-size: 13px;
             color: var(--sleep-footer-text);
             line-height: 1.6;
             letter-spacing: 0.02em;
-            padding: 0 0.5rem;
+            padding: 0;
+            width: 100%;
         }
 
         @media (max-width: 600px) {
@@ -577,7 +578,7 @@
                 gap: 8px;
             }
             .card {
-                padding: 20px 10px 10px;
+                padding: 16px 8px 10px;
                 border-radius: 14px;
             }
             .card.best::before {
@@ -585,6 +586,7 @@
             }
             .card-time {
                 font-size: 20px;
+                margin-top: 4px;
             }
             .card-cycles {
                 font-size: 10px;
@@ -597,15 +599,27 @@
             .card-desc {
                 display: none;
             }
-            .card .best-badge,
-            .card .highlight-badge {
-                font-size: 9px;
-                top: 8px;
-                right: 8px;
+
+            /* Бейджи на мобилках */
+            .card-badge {
+                position: relative;
+                top: auto;
+                right: auto;
+                display: block;
+                text-align: center;
+                margin-bottom: 4px;
+                font-size: 8px;
+                padding: 1px 4px;
+                width: 100%;
             }
 
             .options-title {
                 font-size: 0.6rem;
+            }
+
+            .info-note {
+                font-size: 11px;
+                line-height: 1.4;
             }
 
             .footer .links {
@@ -684,8 +698,7 @@
                     </div>
 
                     <div class="info-note">
-                        +15 минут закладываем на засыпание · 5–6 циклов = 7.5–9 часов сна<br>
-                        Если просыпаешься в конце цикла — голова свежая, а не ватная
+                        +15 минут закладываем на засыпание · 5–6 циклов = 7.5–9 часов сна · Если просыпаешься в конце цикла — голова свежая, а не ватная
                     </div>
 
                 </div>
@@ -864,11 +877,11 @@
                     const isHighlight = o.highlight;
 
                     if (isBest && isHighlight) {
-                        badgeHTML = '<span class="best-badge">✨ идеально</span>';
+                        badgeHTML = '<span class="card-badge badge-best">✨ идеально</span>';
                     } else if (isBest) {
-                        badgeHTML = '<span class="best-badge">✨ идеально</span>';
+                        badgeHTML = '<span class="card-badge badge-best">✨ идеально</span>';
                     } else if (isHighlight) {
-                        badgeHTML = '<span class="highlight-badge">⚡ ложись сейчас!</span>';
+                        badgeHTML = '<span class="card-badge badge-highlight">⚡ ложись сейчас!</span>';
                     }
 
                     return `
