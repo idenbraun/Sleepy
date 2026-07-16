@@ -342,6 +342,9 @@
         .card:nth-child(3) { animation-delay: 0.15s; }
         .card:nth-child(4) { animation-delay: 0.2s; }
         .card:nth-child(5) { animation-delay: 0.25s; }
+        .card:nth-child(6) { animation-delay: 0.3s; }
+        .card:nth-child(7) { animation-delay: 0.35s; }
+        .card:nth-child(8) { animation-delay: 0.4s; }
 
         .card:hover {
             transform: translateY(-4px);
@@ -589,7 +592,7 @@
                     </div>
 
                     <div class="info-note">
-                        +15 минут закладываем на засыпание · 5–6 циклов = 7.5–9 часов сна · Если просыпаешься в конце цикла — голова свежая, а не ватная
+                        +15 минут закладываем на засыпание · 3–8 циклов = 4.5–12 часов сна · Если просыпаешься в конце цикла — голова свежая, а не ватная
                     </div>
 
                 </div>
@@ -656,16 +659,21 @@
 
                 const results = [];
 
-                for (let cycles = 3; cycles <= 7; cycles++) {
+                // Увеличили диапазон до 8 циклов (от 4.5 до 12 часов)
+                for (let cycles = 3; cycles <= 8; cycles++) {
                     const sleepDuration = cycles * CYCLE_MIN;
-                    const bedTime = wakeTotal - sleepDuration - FALL_ASLEEP_MIN;
+                    
+                    // АБСОЛЮТНОЕ время отхода ко сну в минутах от начала "сегодняшних" суток.
+                    // Может быть > 1440, если это завтра.
+                    const bedTimeAbsolute = wakeTotal - sleepDuration - FALL_ASLEEP_MIN;
 
-                    // УМНАЯ ФИЛЬТРАЦИЯ: пропускаем время, которое уже прошло сегодня
-                    if (bedTime < nowTotal) {
+                    // ТИХАЯ ЛОГИКА: пропускаем время, которое уже прошло сегодня
+                    if (bedTimeAbsolute < nowTotal) {
                         continue;
                     }
 
-                    const displayTime = bedTime % (24 * 60);
+                    // Время для отображения на карточке (в пределах 0-1439 минут)
+                    const displayTime = bedTimeAbsolute % (24 * 60);
                     const bedH = Math.floor(displayTime / 60);
                     const bedM = displayTime % 60;
 
@@ -685,6 +693,9 @@
                     } else if (cycles === 7) {
                         rating = 'good';
                         desc = 'Для тех, кто любит поспать подольше. 10.5 часов.';
+                    } else if (cycles === 8) {
+                        rating = 'good';
+                        desc = 'Максимальное восстановление. 12 часов — после сильного недосыпа.';
                     } else {
                         rating = 'low';
                         desc = 'Маловато. Только если это разовая история.';
@@ -693,12 +704,14 @@
                     results.push({
                         cycles, bedH, bedM, sleepH, sleepM, rating, desc,
                         timeStr: pad(bedH) + ':' + pad(bedM),
-                        timeTotal: displayTime
+                        timeTotal: displayTime,
+                        bedTimeAbsolute: bedTimeAbsolute // Сохраняем для корректной сортировки
                     });
                 }
 
-                // Сортировка по возрастанию времени (от ближайшего к позднему)
-                results.sort((a, b) => a.timeTotal - b.timeTotal);
+                // Сортировка по абсолютному времени наступления (от ближайшего к дальнему).
+                // Это гарантирует, что 23:50 сегодня (1430) будет перед 00:40 завтра (1480).
+                results.sort((a, b) => a.bedTimeAbsolute - b.bedTimeAbsolute);
                 return results;
             }
 
@@ -707,7 +720,7 @@
                 const nowTotal = now.getHours() * 60 + now.getMinutes() + FALL_ASLEEP_MIN;
                 const results = [];
 
-                for (let cycles = 3; cycles <= 7; cycles++) {
+                for (let cycles = 3; cycles <= 8; cycles++) {
                     const wakeTime = nowTotal + cycles * CYCLE_MIN;
                     let wake = ((wakeTime % (24 * 60)) + 24 * 60) % (24 * 60);
                     const wakeH = Math.floor(wake / 60);
@@ -730,6 +743,9 @@
                     } else if (cycles === 7) {
                         rating = 'good';
                         desc = 'Для тех, кто любит поспать подольше. 10.5 часов.';
+                    } else if (cycles === 8) {
+                        rating = 'good';
+                        desc = 'Максимальное восстановление. 12 часов — после сильного недосыпа.';
                     } else {
                         rating = 'low';
                         desc = 'Маловато. Только если это разовая история.';
@@ -753,9 +769,10 @@
                 options.forEach(opt => {
                     opt.highlight = false;
                     if (mode === 'wake') {
-                        // Подсвечиваем, если время отхода ко сну близко к текущему (±30 мин или переход через полночь)
-                        const diff = Math.abs(opt.timeTotal - nowTotal);
-                        if (diff <= 30 || diff >= (24 * 60 - 30)) {
+                        // Разница между абсолютным временем отхода ко сну и текущим временем
+                        const diff = opt.bedTimeAbsolute - nowTotal;
+                        // Если до сна осталось от 0 до 30 минут
+                        if (diff >= 0 && diff <= 30) {
                             opt.highlight = true;
                         }
                     } else if (mode === 'sleep') {
