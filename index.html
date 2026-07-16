@@ -57,11 +57,7 @@
             --sleep-options-title-text: rgba(255,255,255,0.4);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         html {
             height: 100%;
@@ -88,12 +84,7 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        .stars-container {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-        }
+        .stars-container { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
         .star {
             position: absolute;
             border-radius: 50%;
@@ -139,7 +130,6 @@
             gap: 2rem;
         }
 
-        /* Узкий контейнер для карточек */
         .narrow-container {
             width: 100%;
             max-width: 650px;
@@ -187,11 +177,7 @@
             text-decoration-color: currentColor;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 0.5rem;
-            width: 100%;
-        }
+        .header { text-align: center; margin-bottom: 0.5rem; width: 100%; }
         .logo {
             font-size: 14px;
             letter-spacing: 4px;
@@ -216,10 +202,7 @@
             max-width: 100%;
         }
 
-        .big-clock {
-            text-align: center;
-            margin: 0.5rem 0;
-        }
+        .big-clock { text-align: center; margin: 0.5rem 0; }
         .clock-time {
             font-size: clamp(48px, 10vw, 72px);
             font-weight: 350;
@@ -261,10 +244,7 @@
             box-shadow: 0 0 20px rgba(180, 74, 255, 0.2);
         }
 
-        .time-picker {
-            padding: 16px 0 8px;
-            text-align: center;
-        }
+        .time-picker { padding: 16px 0 8px; text-align: center; }
         .time-display {
             display: flex;
             align-items: center;
@@ -354,20 +334,16 @@
             animation: cardFadeIn 0.5s ease backwards;
         }
         @keyframes cardFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(12px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .card:nth-child(1) { animation-delay: 0.05s; }
         .card:nth-child(2) { animation-delay: 0.1s; }
         .card:nth-child(3) { animation-delay: 0.15s; }
         .card:nth-child(4) { animation-delay: 0.2s; }
         .card:nth-child(5) { animation-delay: 0.25s; }
+        .card:nth-child(6) { animation-delay: 0.3s; }
+        .card:nth-child(7) { animation-delay: 0.35s; }
 
         .card:hover {
             transform: translateY(-4px);
@@ -375,7 +351,6 @@
             box-shadow: 0 8px 32px rgba(180, 74, 255, 0.12);
         }
 
-        /* Карточка "идеально" */
         .card.best {
             border: 1px solid transparent;
             background: var(--sleep-card-bg);
@@ -409,7 +384,6 @@
             animation: borderRotate 2s linear infinite, bestGlow 1.5s ease-in-out infinite;
         }
 
-        /* Карточка "ложись сейчас" */
         .card.highlight {
             border-color: rgba(180, 74, 255, 0.5);
             background: rgba(180, 74, 255, 0.08);
@@ -421,7 +395,6 @@
             50% { box-shadow: 0 0 30px rgba(180, 74, 255, 0.6); }
         }
 
-        /* Когда карточка и best, и highlight */
         .card.best.highlight {
             border: 1px solid transparent;
             background: var(--sleep-card-bg);
@@ -437,7 +410,6 @@
             50% { box-shadow: 0 0 40px rgba(180, 74, 255, 0.9), 0 0 80px rgba(180, 74, 255, 0.5); }
         }
 
-        /* Бейджи */
         .card-badge {
             position: absolute;
             top: 8px;
@@ -450,12 +422,8 @@
             border-radius: 6px;
             pointer-events: none;
         }
-        .badge-best {
-            color: var(--accent-dim);
-        }
-        .badge-highlight {
-            color: var(--accent-dim);
-        }
+        .badge-best { color: var(--accent-dim); }
+        .badge-highlight { color: var(--accent-dim); }
         .card.best.highlight .badge-best {
             color: #fff;
             text-shadow: 0 0 10px var(--accent-glow);
@@ -468,6 +436,13 @@
             position: relative;
             z-index: 1;
             color: var(--text);
+            white-space: nowrap;
+        }
+        .yesterday-label {
+            opacity: 0.5;
+            font-size: 0.75em;
+            margin-left: 6px;
+            font-weight: 400;
         }
         .card-cycles {
             font-size: 12px;
@@ -527,80 +502,23 @@
         }
 
         @media (max-width: 600px) {
-            body {
-                padding: 0.8rem 0.8rem 0 0.8rem;
-                min-height: 100dvh;
-            }
-
-            .page-content {
-                padding-top: clamp(1.5rem, 6vh, 3rem);
-                padding-bottom: 1.5rem;
-            }
-
-            .narrow-container {
-                gap: 1.5rem;
-            }
-
-            .subtitle {
-                font-size: 13px;
-                line-height: 1.3;
-            }
-
-            .clock-time {
-                font-size: clamp(40px, 8vw, 56px);
-            }
-
-            .mode-btn {
-                padding: 8px 14px;
-                font-size: 12px;
-            }
-
-            .time-input {
-                font-size: 36px;
-                padding: 12px 16px;
-                width: 100px;
-            }
-            .time-sep {
-                font-size: 36px;
-            }
-
-            .presets {
-                gap: 6px;
-            }
-            .preset {
-                flex: 0 0 calc(33.333% - 4px);
-                padding: 8px 6px;
-                font-size: 12px;
-            }
-
-            .options {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
-            }
-            .card {
-                padding: 16px 8px 10px;
-                border-radius: 14px;
-            }
-            .card.best::before {
-                border-radius: 16px;
-            }
-            .card-time {
-                font-size: 20px;
-                margin-top: 4px;
-            }
-            .card-cycles {
-                font-size: 10px;
-                margin-bottom: 6px;
-            }
-            .card-duration {
-                font-size: 10px;
-                padding: 3px 8px;
-            }
-            .card-desc {
-                display: none;
-            }
-
-            /* Бейджи на мобилках */
+            body { padding: 0.8rem 0.8rem 0 0.8rem; min-height: 100dvh; }
+            .page-content { padding-top: clamp(1.5rem, 6vh, 3rem); padding-bottom: 1.5rem; }
+            .narrow-container { gap: 1.5rem; }
+            .subtitle { font-size: 13px; line-height: 1.3; }
+            .clock-time { font-size: clamp(40px, 8vw, 56px); }
+            .mode-btn { padding: 8px 14px; font-size: 12px; }
+            .time-input { font-size: 36px; padding: 12px 16px; width: 100px; }
+            .time-sep { font-size: 36px; }
+            .presets { gap: 6px; }
+            .preset { flex: 0 0 calc(33.333% - 4px); padding: 8px 6px; font-size: 12px; }
+            .options { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+            .card { padding: 16px 8px 10px; border-radius: 14px; }
+            .card.best::before { border-radius: 16px; }
+            .card-time { font-size: 20px; margin-top: 4px; }
+            .card-cycles { font-size: 10px; margin-bottom: 6px; }
+            .card-duration { font-size: 10px; padding: 3px 8px; }
+            .card-desc { display: none; }
             .card-badge {
                 position: relative;
                 top: auto;
@@ -612,33 +530,15 @@
                 padding: 1px 4px;
                 width: 100%;
             }
-
-            .options-title {
-                font-size: 0.6rem;
-            }
-
-            .info-note {
-                font-size: 11px;
-                line-height: 1.4;
-            }
-
-            .footer .links {
-                gap: 1.2rem;
-                font-size: 0.7rem;
-            }
+            .options-title { font-size: 0.6rem; }
+            .info-note { font-size: 11px; line-height: 1.4; }
+            .footer .links { gap: 1.2rem; font-size: 0.7rem; }
         }
 
         @media (max-width: 380px) {
-            .options {
-                grid-template-columns: 1fr;
-            }
-            .mode-btn {
-                padding: 8px 10px;
-                font-size: 11px;
-            }
-            .subtitle {
-                font-size: 11px;
-            }
+            .options { grid-template-columns: 1fr; }
+            .mode-btn { padding: 8px 10px; font-size: 11px; }
+            .subtitle { font-size: 11px; }
         }
     </style>
 </head>
@@ -758,16 +658,16 @@
                 const results = [];
 
                 for (let cycles = 3; cycles <= 7; cycles++) {
-                    const sleepStart = wakeTotal - cycles * CYCLE_MIN;
-                    const bedTime = sleepStart - FALL_ASLEEP_MIN;
+                    const sleepDuration = cycles * CYCLE_MIN;
+                    const rawBedTime = wakeTotal - sleepDuration - FALL_ASLEEP_MIN;
+                    const isYesterday = rawBedTime < 0;
 
-                    let bed = ((bedTime % (24 * 60)) + 24 * 60) % (24 * 60);
+                    let bed = ((rawBedTime % (24 * 60)) + 24 * 60) % (24 * 60);
                     const bedH = Math.floor(bed / 60);
                     const bedM = bed % 60;
 
-                    const totalSleep = cycles * CYCLE_MIN;
-                    const sleepH = Math.floor(totalSleep / 60);
-                    const sleepM = totalSleep % 60;
+                    const sleepH = Math.floor(sleepDuration / 60);
+                    const sleepM = sleepDuration % 60;
 
                     let rating, desc;
                     if (cycles === 6) {
@@ -787,14 +687,18 @@
                         desc = 'Маловато. Только если это разовая история.';
                     }
 
+                    const yesterdayText = isYesterday ? ' <span class="yesterday-label">(вчера)</span>' : '';
+
                     results.push({
                         cycles, bedH, bedM, sleepH, sleepM, rating, desc,
-                        timeStr: pad(bedH) + ':' + pad(bedM),
-                        timeTotal: bedH * 60 + bedM
+                        timeStr: pad(bedH) + ':' + pad(bedM) + yesterdayText,
+                        timeTotal: bedH * 60 + bedM,
+                        sortValue: rawBedTime // Для корректной хронологической сортировки с учётом "вчера"
                     });
                 }
 
-                results.sort((a, b) => b.cycles - a.cycles);
+                // Сортируем по реальному времени отхода ко сну (от раннего к позднему)
+                results.sort((a, b) => a.sortValue - b.sortValue);
                 return results;
             }
 
@@ -803,7 +707,8 @@
                 const nowTotal = now.getHours() * 60 + now.getMinutes() + FALL_ASLEEP_MIN;
                 const results = [];
 
-                for (let cycles = 3; cycles <= 7; cycles++) {
+                // Добавлены 1 и 2 циклы для дневного сна
+                for (let cycles = 1; cycles <= 7; cycles++) {
                     const wakeTime = nowTotal + cycles * CYCLE_MIN;
                     let wake = ((wakeTime % (24 * 60)) + 24 * 60) % (24 * 60);
                     const wakeH = Math.floor(wake / 60);
@@ -814,12 +719,18 @@
                     const sleepM = totalSleep % 60;
 
                     let rating, desc;
-                    if (cycles === 6) {
-                        rating = 'best';
-                        desc = 'Золотой стандарт. 9 часов — проснёшься бодрым и выспавшимся.';
+                    if (cycles === 1) {
+                        rating = 'nap';
+                        desc = 'Короткая перезагрузка. 1.5 часа — чтобы освежить голову.';
+                    } else if (cycles === 2) {
+                        rating = 'nap';
+                        desc = 'Хороший дневной сон. 3 часа — восстановит силы, но не перебёт ночной.';
                     } else if (cycles === 5) {
+                        rating = 'best'; // 7.5 часов более реалистичны как "золотой стандарт"
+                        desc = 'Золотая середина. 7.5 часов — классическая норма для взрослого.';
+                    } else if (cycles === 6) {
                         rating = 'good';
-                        desc = 'Оптимально для большинства. 7.5 часов — классика.';
+                        desc = 'Отличный вариант, если есть время выспаться по максимуму (9 часов).';
                     } else if (cycles === 4) {
                         rating = 'ok';
                         desc = 'Минимум для взрослого. Если совсем дедлайн.';
@@ -838,19 +749,28 @@
                     });
                 }
 
-                results.sort((a, b) => b.cycles - a.cycles);
+                // Сортировка по возрастанию циклов автоматически даёт хронологический порядок пробуждения
+                results.sort((a, b) => a.cycles - b.cycles);
                 return results;
             }
 
-            function highlightBestOption(options) {
+            function highlightBestOption(options, mode) {
                 const now = new Date();
                 const nowTotal = now.getHours() * 60 + now.getMinutes();
 
                 options.forEach(opt => {
                     opt.highlight = false;
-                    const diff = Math.abs(opt.timeTotal - nowTotal);
-                    if (diff <= 30) {
-                        opt.highlight = true;
+                    if (mode === 'wake') {
+                        // Подсвечиваем, если время отхода ко сну близко к текущему (±30 мин или переход через полночь)
+                        const diff = Math.abs(opt.timeTotal - nowTotal);
+                        if (diff <= 30 || diff >= (24 * 60 - 30)) {
+                            opt.highlight = true;
+                        }
+                    } else if (mode === 'sleep') {
+                        // В режиме "Ложусь сейчас" подсвечиваем оптимальные 5 или 6 циклов
+                        if (opt.cycles === 5 || opt.cycles === 6) {
+                            opt.highlight = true;
+                        }
                     }
                 });
             }
@@ -869,20 +789,22 @@
                     optionsTitle.textContent = 'Варианты, когда проснуться';
                 }
 
-                highlightBestOption(options);
+                highlightBestOption(options, currentMode);
 
                 optionsEl.innerHTML = options.map(o => {
-                    let badgeHTML = '';
+                    let badgeText = '';
                     const isBest = o.rating === 'best';
                     const isHighlight = o.highlight;
 
                     if (isBest && isHighlight) {
-                        badgeHTML = '<span class="card-badge badge-best">✨ идеально</span>';
+                        badgeText = currentMode === 'wake' ? '✨ идеально / ложись сейчас!' : '✨ идеально';
                     } else if (isBest) {
-                        badgeHTML = '<span class="card-badge badge-best">✨ идеально</span>';
+                        badgeText = '✨ идеально';
                     } else if (isHighlight) {
-                        badgeHTML = '<span class="card-badge badge-highlight">⚡ ложись сейчас!</span>';
+                        badgeText = currentMode === 'wake' ? '⚡ ложись сейчас!' : '⚡ рекомендуется';
                     }
+
+                    const badgeHTML = badgeText ? `<span class="card-badge ${isBest ? 'badge-best' : 'badge-highlight'}">${badgeText}</span>` : '';
 
                     return `
                         <div class="card ${isBest ? 'best' : ''} ${isHighlight ? 'highlight' : ''}" role="listitem">
