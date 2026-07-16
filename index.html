@@ -342,8 +342,6 @@
         .card:nth-child(3) { animation-delay: 0.15s; }
         .card:nth-child(4) { animation-delay: 0.2s; }
         .card:nth-child(5) { animation-delay: 0.25s; }
-        .card:nth-child(6) { animation-delay: 0.3s; }
-        .card:nth-child(7) { animation-delay: 0.35s; }
 
         .card:hover {
             transform: translateY(-4px);
@@ -436,13 +434,6 @@
             position: relative;
             z-index: 1;
             color: var(--text);
-            white-space: nowrap;
-        }
-        .yesterday-label {
-            opacity: 0.5;
-            font-size: 0.75em;
-            margin-left: 6px;
-            font-weight: 400;
         }
         .card-cycles {
             font-size: 12px;
@@ -654,17 +645,29 @@
             function pad(n) { return n.toString().padStart(2, '0'); }
 
             function calcBedOptions(wakeH, wakeM) {
-                const wakeTotal = wakeH * 60 + wakeM;
+                const now = new Date();
+                const nowTotal = now.getHours() * 60 + now.getMinutes();
+                let wakeTotal = wakeH * 60 + wakeM;
+
+                // Если целевое время меньше или равно текущему, значит, подъём завтра
+                if (wakeTotal <= nowTotal) {
+                    wakeTotal += 24 * 60;
+                }
+
                 const results = [];
 
                 for (let cycles = 3; cycles <= 7; cycles++) {
                     const sleepDuration = cycles * CYCLE_MIN;
-                    const rawBedTime = wakeTotal - sleepDuration - FALL_ASLEEP_MIN;
-                    const isYesterday = rawBedTime < 0;
+                    const bedTime = wakeTotal - sleepDuration - FALL_ASLEEP_MIN;
 
-                    let bed = ((rawBedTime % (24 * 60)) + 24 * 60) % (24 * 60);
-                    const bedH = Math.floor(bed / 60);
-                    const bedM = bed % 60;
+                    // УМНАЯ ФИЛЬТРАЦИЯ: пропускаем время, которое уже прошло сегодня
+                    if (bedTime < nowTotal) {
+                        continue;
+                    }
+
+                    const displayTime = bedTime % (24 * 60);
+                    const bedH = Math.floor(displayTime / 60);
+                    const bedM = displayTime % 60;
 
                     const sleepH = Math.floor(sleepDuration / 60);
                     const sleepM = sleepDuration % 60;
@@ -687,18 +690,15 @@
                         desc = 'Маловато. Только если это разовая история.';
                     }
 
-                    const yesterdayText = isYesterday ? ' <span class="yesterday-label">(вчера)</span>' : '';
-
                     results.push({
                         cycles, bedH, bedM, sleepH, sleepM, rating, desc,
-                        timeStr: pad(bedH) + ':' + pad(bedM) + yesterdayText,
-                        timeTotal: bedH * 60 + bedM,
-                        sortValue: rawBedTime // Для корректной хронологической сортировки с учётом "вчера"
+                        timeStr: pad(bedH) + ':' + pad(bedM),
+                        timeTotal: displayTime
                     });
                 }
 
-                // Сортируем по реальному времени отхода ко сну (от раннего к позднему)
-                results.sort((a, b) => a.sortValue - b.sortValue);
+                // Сортировка по возрастанию времени (от ближайшего к позднему)
+                results.sort((a, b) => a.timeTotal - b.timeTotal);
                 return results;
             }
 
@@ -707,8 +707,7 @@
                 const nowTotal = now.getHours() * 60 + now.getMinutes() + FALL_ASLEEP_MIN;
                 const results = [];
 
-                // Добавлены 1 и 2 циклы для дневного сна
-                for (let cycles = 1; cycles <= 7; cycles++) {
+                for (let cycles = 3; cycles <= 7; cycles++) {
                     const wakeTime = nowTotal + cycles * CYCLE_MIN;
                     let wake = ((wakeTime % (24 * 60)) + 24 * 60) % (24 * 60);
                     const wakeH = Math.floor(wake / 60);
@@ -719,18 +718,12 @@
                     const sleepM = totalSleep % 60;
 
                     let rating, desc;
-                    if (cycles === 1) {
-                        rating = 'nap';
-                        desc = 'Короткая перезагрузка. 1.5 часа — чтобы освежить голову.';
-                    } else if (cycles === 2) {
-                        rating = 'nap';
-                        desc = 'Хороший дневной сон. 3 часа — восстановит силы, но не перебёт ночной.';
+                    if (cycles === 6) {
+                        rating = 'best';
+                        desc = 'Золотой стандарт. 9 часов — проснёшься бодрым и выспавшимся.';
                     } else if (cycles === 5) {
-                        rating = 'best'; // 7.5 часов более реалистичны как "золотой стандарт"
-                        desc = 'Золотая середина. 7.5 часов — классическая норма для взрослого.';
-                    } else if (cycles === 6) {
                         rating = 'good';
-                        desc = 'Отличный вариант, если есть время выспаться по максимуму (9 часов).';
+                        desc = 'Оптимально для большинства. 7.5 часов — классика.';
                     } else if (cycles === 4) {
                         rating = 'ok';
                         desc = 'Минимум для взрослого. Если совсем дедлайн.';
@@ -749,7 +742,6 @@
                     });
                 }
 
-                // Сортировка по возрастанию циклов автоматически даёт хронологический порядок пробуждения
                 results.sort((a, b) => a.cycles - b.cycles);
                 return results;
             }
@@ -790,6 +782,15 @@
                 }
 
                 highlightBestOption(options, currentMode);
+
+                // Защита от пустого экрана, если все варианты уже прошли
+                if (currentMode === 'wake' && options.length === 0) {
+                    optionsEl.innerHTML = `<div style="grid-column: 1/-1; color: var(--sleep-footer-text); font-size: 14px; padding: 20px; line-height: 1.5;">
+                        Для этого времени пробуждения сегодня уже поздно ложиться.<br>
+                        Попробуйте вздремнуть (режим "Ложусь сейчас") или сдвиньте время подъёма.
+                    </div>`;
+                    return;
+                }
 
                 optionsEl.innerHTML = options.map(o => {
                     let badgeText = '';
