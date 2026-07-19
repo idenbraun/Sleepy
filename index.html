@@ -3,121 +3,136 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <meta name="theme-color" content="#0a0a0a">
+    <meta name="theme-color" content="#050508">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Sleepy</title>
 
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlNsZWVweSIsCiAgInNob3J0X25hbWUiOiAiU2xlZXB5IiwKICAiZGVzY3JpcHRpb24iOiAi0KjRg9C80L3Ri9C5INGC0LDQudC80LXRgCDRgdC90LAiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzBhMGEwYSIsCiAgInRoZW1lX2NvbG9yIjogIiMwYTBhMGEiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWwsJTNDc3ZnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zycgdmlld0JveD0nMCAwIDUxMiA1MTInJTNFJTNDcmVjdCB3aWR0aD0nNTEyJyBoZWlnaHQ9JzUxMicgZmlsbD0nJTIzMGEwYTBhJyByeD0nNjQnLyUzRSUzQ3RleHQgeD0nMjU2JyB5PSczMjAnIGZvbnQtc2l6ZT0nMjUwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmaWxsPSclMjNmZmYnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyUzRSV1MUQ2MzQlMjAlM0MvdGV4dCUzRSUzQy9zdmclM0UiLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiLAogICAgICAicHVycG9zZSI6ICJhbnkgbWFzayBhbnlsYW5nIgogICAgfQogIF0sCiAgIm9yaWVudGF0aW9uIjogInBvcnRyYWl0Igp9">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%230a0a0a' rx='64'/%3E%3Ctext x='256' y='320' font-size='250' text-anchor='middle' fill='%23fff' font-family='sans-serif'%3E🌜%3C/text%3E%3C/svg%3E" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%230a0a0a' rx='64'/%3E%3Ctext x='256' y='320' font-size='250' text-anchor='middle' fill='%23fff' font-family='sans-serif'%3E🌜%3C/text%3E%3C/svg%3E">
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlNsZWVweSIsCiAgInNob3J0X25hbWUiOiAiU2xlZXB5IiwKICAiZGVzY3JpcHRpb24iOiAi0KjRg9C80L3Ri9C5INGC0LDQudC80LXRgCDRgdC90LAiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzA1MDUwOCIsCiAgInRoZW1lX2NvbG9yIjogIiMwNTA1MDgiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWwsJTNDc3ZnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zycgdmlld0JveD0nMCAwIDUxMiA1MTInJTNFJTNDcmVjdCB3aWR0aD0nNTEyJyBoZWlnaHQ9JzUxMicgZmlsbD0nJTIzMDUwNTA4JyByeD0nNjQnLyUzRSUzQ3RleHQgeD0nMjU2JyB5PSczMjAnIGZvbnQtc2l6ZT0nMjUwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmaWxsPSclMjNmZmYnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyUzRSV1MUQ2MzQlMjAlM0MvdGV4dCUzRSUzQy9zdmclM0UiLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiLAogICAgICAicHVycG9zZSI6ICJhbnkgbWFzayBhbnlsYW5nIgogICAgfQogIF0sCiAgIm9yaWVudGF0aW9uIjogInBvcnRyYWl0Igp9">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%23050508' rx='64'/%3E%3Ctext x='256' y='320' font-size='250' text-anchor='middle' fill='%23fff' font-family='sans-serif'%3E🌜%3C/text%3E%3C/svg%3E" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%23050508' rx='64'/%3E%3Ctext x='256' y='320' font-size='250' text-anchor='middle' fill='%23fff' font-family='sans-serif'%3E🌜%3C/text%3E%3C/svg%3E">
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
         :root {
-            --bg: #0a0a0a;
-            --text: #e0e0e0;
-            --text-secondary: #6a6a6a;
-            --text-muted: #4a4a4a;
+            --bg-deep: #050508;
             
-            --accent: #b44aff;
-            --accent-dim: #c87aff;
-            --accent-glow: rgba(180, 74, 255, 0.7);
-            --accent-soft: rgba(180, 74, 255, 0.15);
-            --accent-gradient: linear-gradient(135deg, #b44aff 0%, #e040fb 50%, #7c4dff 100%);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-bg-hover: rgba(255, 255, 255, 0.06);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-border-hover: rgba(255, 255, 255, 0.15);
+            --glass-highlight: rgba(255, 255, 255, 0.1);
+            --blur-amount: 24px;
             
-            --footer-text: #3a3a3a;
-            --footer-link: #6a6a6a;
-            --footer-link-hover: #c0c0c0;
-            --footer-border: #181818;
-            --number-color: #d4d4d4;
+            --accent-1: #c084fc; /* Bright Purple */
+            --accent-2: #e879f9; /* Bright Pink */
+            --accent-3: #3b82f6; /* Blue */
+            --accent-glow: rgba(192, 132, 252, 0.4);
             
-            --sleep-card-bg: rgba(255,255,255,0.03);
-            --sleep-card-border: rgba(255,255,255,0.06);
-            --sleep-input-bg: rgba(0,0,0,0.4);
-            --sleep-input-border: rgba(255,255,255,0.08);
-            --sleep-reminder-bg: rgba(180, 74, 255, 0.15);
-            --sleep-reminder-border: rgba(180, 74, 255, 0.25);
-            --sleep-reminder-text: #c87aff;
-            --sleep-footer-text: rgba(255,255,255,0.25);
-            --sleep-preset-bg: rgba(255,255,255,0.04);
-            --sleep-preset-border: rgba(255,255,255,0.08);
-            --sleep-preset-text: rgba(255,255,255,0.6);
-            --sleep-mode-bg: rgba(255,255,255,0.03);
-            --sleep-mode-active-bg: rgba(180, 74, 255, 0.15);
-            --sleep-mode-text: rgba(255,255,255,0.45);
-            --sleep-mode-active-text: #e0e0e0;
-            --sleep-subtitle-text: rgba(255,255,255,0.5);
-            --sleep-title-gradient-from: #ffffff;
-            --sleep-title-gradient-to: #c87aff;
-            --sleep-logo-text: #b44aff;
-            --sleep-duration-bg: rgba(255,255,255,0.06);
-            --sleep-duration-text: rgba(255,255,255,0.6);
-            --sleep-card-desc-text: rgba(255,255,255,0.4);
-            --sleep-card-cycles-text: rgba(255,255,255,0.4);
-            --sleep-options-title-text: rgba(255,255,255,0.4);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.6);
+            --text-muted: rgba(255, 255, 255, 0.3);
+            
+            --footer-text: rgba(255, 255, 255, 0.25);
+            --footer-link: rgba(255, 255, 255, 0.4);
+            --footer-link-hover: #ffffff;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        html {
+        html, body {
             height: 100%;
             min-height: 100vh;
             min-height: 100dvh;
-            background: var(--bg);
         }
 
         body {
-            min-height: 100vh;
-            min-height: 100dvh;
             margin: 0;
-            padding: 1.5rem 1.5rem 0 1.5rem;
-            font-family: 'Inter', 'Helvetica Neue', system-ui, -apple-system, sans-serif;
-            color: var(--text);
+            padding: 1.5rem;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-primary);
             letter-spacing: -0.01em;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            background: transparent;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            background: var(--bg-deep);
         }
 
-        .stars-container { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
-        .star {
+        /* --- Liquid Background --- */
+        .liquid-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            background: var(--bg-deep);
+        }
+        .blob {
             position: absolute;
             border-radius: 50%;
-            background: #fff;
-            animation: twinkle var(--duration) ease-in-out infinite;
-            animation-delay: var(--delay);
-            opacity: 0;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: float 20s infinite ease-in-out alternate;
         }
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.15; }
-            50% { opacity: 0.7; }
+        .blob-1 { 
+            width: 50vw; height: 50vw; 
+            background: radial-gradient(circle, var(--accent-1) 0%, transparent 70%); 
+            top: -10%; left: -10%; 
+            animation-duration: 25s; 
+        }
+        .blob-2 { 
+            width: 40vw; height: 40vw; 
+            background: radial-gradient(circle, var(--accent-2) 0%, transparent 70%); 
+            bottom: -10%; right: -10%; 
+            animation-duration: 30s; 
+            animation-delay: -5s; 
+        }
+        .blob-3 { 
+            width: 35vw; height: 35vw; 
+            background: radial-gradient(circle, var(--accent-3) 0%, transparent 70%); 
+            top: 40%; left: 50%; 
+            animation-duration: 22s; 
+            animation-delay: -10s; 
         }
 
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -40px) scale(1.1); }
+            100% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        .noise-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* --- Layout --- */
         .app-wrapper {
             display: flex;
             flex-direction: column;
-            flex: 1 0 auto;
+            flex: 1; /* Занимает всё доступное пространство, прижимая футер вниз */
             width: 100%;
-            max-width: 1000px;
-            min-height: 100vh;
-            min-height: 100dvh;
+            max-width: 800px;
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
         .page-content {
-            flex: 1 0 auto;
+            flex: 1; /* Растягивается, толкая футер вниз */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
             width: 100%;
-            padding-top: clamp(2rem, 8vh, 5rem);
+            padding-top: clamp(2rem, 8vh, 4rem);
             padding-bottom: 1.5rem;
         }
 
@@ -127,149 +142,147 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
         .narrow-container {
             width: 100%;
-            max-width: 650px;
+            max-width: 600px;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 2rem;
         }
 
-        .footer {
-            flex-shrink: 0;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.7rem;
-            color: var(--footer-text);
-            font-size: 0.75rem;
-            letter-spacing: 0.15em;
-            padding: 1.8rem 1rem 3rem;
-            border-top: 1px solid var(--footer-border);
-            margin-top: auto;
-        }
-
-        .footer .links {
-            display: flex;
-            gap: 2.2rem;
-            flex-wrap: nowrap;
-            justify-content: center;
-            white-space: nowrap;
-        }
-
-        .footer a {
-            color: var(--footer-link);
-            text-decoration: underline;
-            text-underline-offset: 3px;
-            text-decoration-thickness: 1px;
-            text-decoration-color: transparent;
-            transition: text-decoration-color 0.25s, color 0.25s;
-            font-weight: 400;
-            letter-spacing: 0.02em;
-        }
-        .footer a:hover {
-            color: var(--footer-link-hover);
-            text-decoration-color: currentColor;
-        }
-
+        /* --- Typography --- */
         .header { text-align: center; margin-bottom: 0.5rem; width: 100%; }
         .logo {
-            font-size: 14px;
-            letter-spacing: 4px;
-            color: var(--sleep-logo-text);
-            text-transform: uppercase;
-            margin-bottom: 12px;
-        }
-        h1 {
-            font-size: clamp(36px, 6vw, 56px);
-            font-weight: 300;
-            background: linear-gradient(135deg, var(--sleep-title-gradient-from) 0%, var(--sleep-title-gradient-to) 100%);
+            font-size: 15px;
+            letter-spacing: 6px;
+            /* Яркий акцентный градиент для названия */
+            background: linear-gradient(135deg, var(--accent-1) 0%, var(--accent-2) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 12px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            font-weight: 700;
+            filter: drop-shadow(0 0 8px rgba(192, 132, 252, 0.5));
+        }
+        h1 {
+            font-size: clamp(40px, 8vw, 64px);
+            font-weight: 300;
+            background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+            filter: drop-shadow(0 0 20px rgba(192, 132, 252, 0.3));
         }
         .subtitle {
-            color: var(--sleep-subtitle-text);
-            font-size: clamp(13px, 2vw, 16px);
+            color: var(--text-secondary);
+            font-size: clamp(14px, 2.5vw, 17px);
             font-weight: 300;
-            line-height: 1.4;
-            max-width: 100%;
+            line-height: 1.5;
+            max-width: 90%;
+            margin: 0 auto;
         }
 
-        .big-clock { text-align: center; margin: 0.5rem 0; }
+        /* --- Glass Components --- */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--blur-amount)) saturate(180%);
+            -webkit-backdrop-filter: blur(var(--blur-amount)) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 1px var(--glass-highlight),
+                inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+        }
+
+        .big-clock { 
+            text-align: center; 
+            margin: 0.5rem 0; 
+            padding: 1.5rem 2.5rem;
+        }
         .clock-time {
-            font-size: clamp(48px, 10vw, 72px);
-            font-weight: 350;
-            color: var(--number-color);
-            letter-spacing: 0.04em;
+            font-size: clamp(56px, 12vw, 80px);
+            font-weight: 200;
+            color: var(--text-primary);
+            letter-spacing: 0.02em;
             font-feature-settings: "tnum";
             font-variant-numeric: tabular-nums;
-            font-family: 'Inter', 'SF Mono', 'JetBrains Mono', monospace;
+            font-family: 'Inter', 'SF Mono', monospace;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
         }
 
         .mode-toggle {
             display: flex;
-            background: var(--sleep-mode-bg);
-            border-radius: 14px;
-            padding: 4px;
-            margin: 0 auto 0.5rem;
-            max-width: 500px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            padding: 6px;
+            margin: 0 auto 1rem;
+            max-width: 400px;
             width: 100%;
-            gap: 4px;
+            gap: 6px;
         }
         .mode-btn {
             flex: 1;
             background: transparent;
             border: none;
-            color: var(--sleep-mode-text);
-            padding: 10px 20px;
-            border-radius: 11px;
+            color: var(--text-secondary);
+            padding: 12px 20px;
+            border-radius: 100px;
             font-size: 14px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             font-family: inherit;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.01em;
             font-weight: 500;
             white-space: nowrap;
         }
         .mode-btn.active {
-            background: var(--sleep-mode-active-bg);
-            color: var(--sleep-mode-active-text);
-            box-shadow: 0 0 20px rgba(180, 74, 255, 0.2);
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: white;
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+        .mode-btn:not(.active):hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
         }
 
-        .time-picker { padding: 16px 0 8px; text-align: center; }
+        .time-picker { padding: 8px 0; text-align: center; }
         .time-display {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            margin-bottom: 20px;
+            gap: 12px;
+            margin-bottom: 24px;
         }
         .time-input {
-            background: var(--sleep-input-bg);
-            border: 1px solid var(--sleep-input-border);
-            border-radius: 16px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
             padding: 16px 24px;
             font-size: 48px;
             font-weight: 300;
-            color: var(--text);
-            width: 130px;
+            color: var(--text-primary);
+            width: 120px;
             text-align: center;
             outline: none;
-            transition: all 0.3s;
-            font-family: 'Inter', 'SF Mono', 'JetBrains Mono', monospace;
+            transition: all 0.3s ease;
+            font-family: 'Inter', monospace;
             letter-spacing: 0.02em;
+            backdrop-filter: blur(12px);
         }
         .time-input:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 25px var(--accent-glow);
+            border-color: var(--accent-1);
+            box-shadow: 0 0 0 4px rgba(192, 132, 252, 0.15), 0 0 30px var(--accent-glow);
+            background: rgba(0, 0, 0, 0.3);
         }
         .time-sep {
             font-size: 48px;
@@ -279,63 +292,73 @@
 
         .presets {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             justify-content: center;
             flex-wrap: wrap;
         }
         .preset {
-            background: var(--sleep-preset-bg);
-            border: 1px solid var(--sleep-preset-border);
-            color: var(--sleep-preset-text);
-            padding: 8px 16px;
-            border-radius: 12px;
-            font-size: 13px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+            padding: 10px 20px;
+            border-radius: 100px;
+            font-size: 14px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
             font-family: inherit;
-            letter-spacing: 0.02em;
+            font-weight: 500;
+            backdrop-filter: blur(8px);
         }
         .preset:hover {
-            background: var(--sleep-mode-active-bg);
-            border-color: var(--accent);
-            color: var(--text);
+            background: var(--glass-bg-hover);
+            border-color: var(--glass-border-hover);
+            color: var(--text-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
 
         .options-section {
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 1.2rem;
         }
         .options-title {
             text-align: center;
-            font-size: 0.7rem;
-            letter-spacing: 0.2em;
-            color: var(--sleep-options-title-text);
+            font-size: 0.75rem;
+            letter-spacing: 0.25em;
+            color: var(--text-muted);
             text-transform: uppercase;
+            font-weight: 600;
         }
         .options {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 16px;
             width: 100%;
         }
 
-        /* ----- КАРТОЧКИ ----- */
+        /* --- Liquid Glass Cards --- */
         .card {
-            background: var(--sleep-card-bg);
-            border: 1px solid var(--sleep-card-border);
-            border-radius: 20px;
-            padding: 28px 20px 20px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(var(--blur-amount)) saturate(180%);
+            -webkit-backdrop-filter: blur(var(--blur-amount)) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 44px 20px 20px;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
-            overflow: visible;
-            animation: cardFadeIn 0.5s ease backwards;
+            overflow: hidden;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 1px var(--glass-highlight),
+                inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+            animation: cardFadeIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
         }
         @keyframes cardFadeIn {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
         .card:nth-child(1) { animation-delay: 0.05s; }
         .card:nth-child(2) { animation-delay: 0.1s; }
@@ -343,216 +366,292 @@
         .card:nth-child(4) { animation-delay: 0.2s; }
         .card:nth-child(5) { animation-delay: 0.25s; }
         .card:nth-child(6) { animation-delay: 0.3s; }
-        .card:nth-child(7) { animation-delay: 0.35s; }
-        .card:nth-child(8) { animation-delay: 0.4s; }
 
         .card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(180, 74, 255, 0.4);
-            box-shadow: 0 8px 32px rgba(180, 74, 255, 0.12);
+            background: var(--glass-bg-hover);
+            border-color: var(--glass-border-hover);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 
+                0 16px 48px rgba(0, 0, 0, 0.4),
+                inset 0 1px 1px rgba(255, 255, 255, 0.15),
+                0 0 20px var(--accent-glow);
         }
 
         .card.best {
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid transparent;
-            background: var(--sleep-card-bg);
-            isolation: isolate;
+            z-index: 1;
         }
         .card.best::before {
             content: '';
             position: absolute;
             inset: -2px;
-            border-radius: 22px;
-            padding: 2px;
-            background: var(--accent-gradient);
+            border-radius: 26px;
+            background: conic-gradient(from 0deg, var(--accent-1), var(--accent-2), var(--accent-3), var(--accent-1));
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
-            opacity: 1;
-            animation: borderRotate 4s linear infinite, bestGlow 2s ease-in-out infinite;
+            animation: rotate 4s linear infinite;
             z-index: -1;
-            pointer-events: none;
+            filter: blur(0.5px);
         }
-        @keyframes borderRotate {
-            0% { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(360deg); }
+        .card.best::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 26px;
+            background: conic-gradient(from 0deg, var(--accent-1), var(--accent-2), var(--accent-3), var(--accent-1));
+            filter: blur(16px);
+            opacity: 0.6;
+            z-index: -2;
+            animation: rotate 4s linear infinite;
         }
-        @keyframes bestGlow {
-            0%, 100% { box-shadow: 0 0 15px rgba(180, 74, 255, 0.4), 0 0 30px rgba(180, 74, 255, 0.2); }
-            50% { box-shadow: 0 0 25px rgba(180, 74, 255, 0.7), 0 0 50px rgba(180, 74, 255, 0.4); }
+        @keyframes rotate {
+            to { transform: rotate(360deg); }
         }
         .card.best:hover::before {
+            filter: blur(1px);
             opacity: 1;
-            animation: borderRotate 2s linear infinite, bestGlow 1.5s ease-in-out infinite;
         }
 
         .card.highlight {
-            border-color: rgba(180, 74, 255, 0.5);
-            background: rgba(180, 74, 255, 0.08);
-            box-shadow: 0 0 15px rgba(180, 74, 255, 0.3);
-            animation: glowPulse 2s ease-in-out infinite, cardFadeIn 0.5s ease backwards;
+            border-color: rgba(192, 132, 252, 0.4);
+            background: linear-gradient(135deg, rgba(192, 132, 252, 0.1) 0%, rgba(232, 121, 249, 0.05) 100%);
+            box-shadow: 0 0 30px rgba(192, 132, 252, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            animation: pulse-glow 3s ease-in-out infinite, cardFadeIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
         }
-        @keyframes glowPulse {
-            0%, 100% { box-shadow: 0 0 15px rgba(180, 74, 255, 0.3); }
-            50% { box-shadow: 0 0 30px rgba(180, 74, 255, 0.6); }
-        }
-
-        .card.best.highlight {
-            border: 1px solid transparent;
-            background: var(--sleep-card-bg);
-            box-shadow: none;
-            animation: cardFadeIn 0.5s ease backwards;
-        }
-        .card.best.highlight::before {
-            opacity: 1;
-            animation: borderRotate 2s linear infinite, bestGlowStrong 1.5s ease-in-out infinite;
-        }
-        @keyframes bestGlowStrong {
-            0%, 100% { box-shadow: 0 0 25px rgba(180, 74, 255, 0.6), 0 0 50px rgba(180, 74, 255, 0.3); }
-            50% { box-shadow: 0 0 40px rgba(180, 74, 255, 0.9), 0 0 80px rgba(180, 74, 255, 0.5); }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(192, 132, 252, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1); }
+            50% { box-shadow: 0 0 40px rgba(192, 132, 252, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2); }
         }
 
+        /* --- Исправленные бейджи --- */
         .card-badge {
             position: absolute;
-            top: 8px;
-            right: 10px;
-            font-size: 10px;
-            letter-spacing: 0.5px;
+            top: 12px;
+            right: 12px;
+            /* Убрано left: 12px и max-width: 100%, чтобы контейнер не растягивался */
+            width: fit-content;
+            max-width: 85%;
+            font-size: 11px;
+            letter-spacing: 0.3px;
             z-index: 2;
-            white-space: nowrap;
-            padding: 2px 6px;
-            border-radius: 6px;
+            padding: 5px 10px;
+            border-radius: 100px;
             pointer-events: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            text-align: center;
+            line-height: 1.3;
+            white-space: normal;
         }
-        .badge-best { color: var(--accent-dim); }
-        .badge-highlight { color: var(--accent-dim); }
+        .badge-best { 
+            background: rgba(192, 132, 252, 0.15);
+            color: #e9d5ff;
+            border: 1px solid rgba(192, 132, 252, 0.3);
+        }
+        .badge-highlight { 
+            background: rgba(232, 121, 249, 0.15);
+            color: #fbcfe8;
+            border: 1px solid rgba(232, 121, 249, 0.3);
+        }
         .card.best.highlight .badge-best {
+            background: rgba(255, 255, 255, 0.15);
             color: #fff;
-            text-shadow: 0 0 10px var(--accent-glow);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
         }
 
         .card-time {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 300;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
             position: relative;
             z-index: 1;
-            color: var(--text);
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
         }
         .card-cycles {
-            font-size: 12px;
-            color: var(--sleep-card-cycles-text);
-            margin-bottom: 12px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
             position: relative;
             z-index: 1;
+            font-weight: 500;
         }
         .card-duration {
             display: inline-block;
-            background: var(--sleep-duration-bg);
-            padding: 4px 12px;
-            border-radius: 8px;
-            font-size: 12px;
-            color: var(--sleep-duration-text);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 13px;
+            color: var(--text-primary);
             position: relative;
             z-index: 1;
+            font-weight: 500;
+            backdrop-filter: blur(8px);
         }
         .card-desc {
-            margin-top: 12px;
-            font-size: 13px;
-            color: var(--sleep-card-desc-text);
+            margin-top: 16px;
+            font-size: 14px;
+            color: var(--text-secondary);
             line-height: 1.5;
             position: relative;
             z-index: 1;
+            font-weight: 300;
         }
 
         .reminder-btn {
             display: none;
-            margin: 1rem auto 0;
-            padding: 12px 24px;
-            background: var(--sleep-reminder-bg);
-            border: 1px solid var(--sleep-reminder-border);
-            border-radius: 12px;
-            color: var(--sleep-reminder-text);
-            font-size: 14px;
+            margin: 1.5rem auto 0;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, rgba(192, 132, 252, 0.15), rgba(232, 121, 249, 0.1));
+            border: 1px solid rgba(192, 132, 252, 0.3);
+            border-radius: 100px;
+            color: #f0abfc;
+            font-size: 15px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
             font-family: inherit;
             letter-spacing: 0.02em;
+            font-weight: 500;
+            backdrop-filter: blur(12px);
         }
         .reminder-btn.visible { display: block; }
         .reminder-btn:hover {
-            background: rgba(180, 74, 255, 0.22);
-            border-color: var(--accent);
-            box-shadow: 0 0 20px rgba(180, 74, 255, 0.25);
+            background: linear-gradient(135deg, rgba(192, 132, 252, 0.25), rgba(232, 121, 249, 0.2));
+            border-color: var(--accent-1);
+            box-shadow: 0 0 30px var(--accent-glow);
+            transform: translateY(-2px);
         }
 
         .info-note {
             text-align: center;
             font-size: 13px;
-            color: var(--sleep-footer-text);
+            color: var(--text-muted);
             line-height: 1.6;
-            letter-spacing: 0.02em;
-            padding: 0;
+            letter-spacing: 0.01em;
             width: 100%;
+            max-width: 500px;
+            margin-top: 1rem;
         }
 
+        /* --- Footer --- */
+        .footer {
+            flex-shrink: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            color: var(--footer-text);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            padding: 2rem 1rem 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: auto; /* Гарантированно прижимает к низу */
+        }
+        .footer-links {
+            display: flex;
+            gap: 1.2rem;
+        }
+        .footer-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            background: var(--glass-bg-hover);
+            border-color: var(--accent-1);
+            color: var(--text-primary);
+            box-shadow: 0 0 20px var(--accent-glow);
+            transform: translateY(-3px);
+        }
+        .footer-links svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* --- Mobile Responsiveness --- */
         @media (max-width: 600px) {
-            body { padding: 0.8rem 0.8rem 0 0.8rem; min-height: 100dvh; }
-            .page-content { padding-top: clamp(1.5rem, 6vh, 3rem); padding-bottom: 1.5rem; }
+            body { padding: 1rem; }
+            .page-content { padding-top: clamp(1.5rem, 5vh, 3rem); }
             .narrow-container { gap: 1.5rem; }
-            .subtitle { font-size: 13px; line-height: 1.3; }
-            .clock-time { font-size: clamp(40px, 8vw, 56px); }
-            .mode-btn { padding: 8px 14px; font-size: 12px; }
-            .time-input { font-size: 36px; padding: 12px 16px; width: 100px; }
+            .subtitle { font-size: 14px; line-height: 1.4; max-width: 95%; }
+            .clock-time { font-size: clamp(48px, 10vw, 64px); }
+            .big-clock { padding: 1rem 1.5rem; }
+            .mode-btn { padding: 10px 16px; font-size: 13px; }
+            .time-input { font-size: 36px; padding: 12px 16px; width: 90px; border-radius: 16px; }
             .time-sep { font-size: 36px; }
-            .presets { gap: 6px; }
-            .preset { flex: 0 0 calc(33.333% - 4px); padding: 8px 6px; font-size: 12px; }
-            .options { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-            .card { padding: 16px 8px 10px; border-radius: 14px; }
-            .card.best::before { border-radius: 16px; }
-            .card-time { font-size: 20px; margin-top: 4px; }
-            .card-cycles { font-size: 10px; margin-bottom: 6px; }
-            .card-duration { font-size: 10px; padding: 3px 8px; }
-            .card-desc { display: none; }
-            .card-badge {
-                position: relative;
-                top: auto;
-                right: auto;
-                display: block;
-                text-align: center;
-                margin-bottom: 4px;
-                font-size: 8px;
-                padding: 1px 4px;
-                width: 100%;
+            .presets { gap: 8px; }
+            .preset { padding: 8px 16px; font-size: 13px; }
+            .options { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            
+            .card { 
+                padding: 40px 16px 16px; 
+                border-radius: 20px; 
             }
-            .options-title { font-size: 0.6rem; }
-            .info-note { font-size: 11px; line-height: 1.4; }
-            .footer .links { gap: 1.2rem; font-size: 0.7rem; }
+            .card.best::before, .card.best::after { border-radius: 22px; }
+            
+            .card-badge {
+                font-size: 10px;
+                padding: 4px 8px;
+                top: 10px;
+                right: 10px;
+                max-width: 90%;
+            }
+            
+            .card-time { font-size: 26px; }
+            .card-cycles { font-size: 12px; margin-bottom: 12px; }
+            .card-duration { font-size: 12px; padding: 5px 12px; }
+            .card-desc { display: none; }
+            
+            .options-title { font-size: 0.7rem; }
+            .info-note { font-size: 12px; line-height: 1.5; }
+            
+            .blob-1 { width: 80vw; height: 80vw; }
+            .blob-2 { width: 70vw; height: 70vw; }
+            .blob-3 { width: 60vw; height: 60vw; }
         }
 
         @media (max-width: 380px) {
             .options { grid-template-columns: 1fr; }
-            .mode-btn { padding: 8px 10px; font-size: 11px; }
-            .subtitle { font-size: 11px; }
+            .mode-btn { padding: 8px 12px; font-size: 12px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="stars-container" id="starsContainer"></div>
+    <div class="liquid-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+    <div class="noise-overlay"></div>
 
     <div class="app-wrapper">
         <div class="page-content">
             <div class="container">
 
                 <header class="header">
-                    <div class="logo">🌙 Sleepy</div>
+                    <div class="logo">Sleepy</div>
                     <h1>Просыпайся легко</h1>
                     <p class="subtitle">Цикл сна длится ~90 минут. Ложись так, чтобы проснуться между циклами — и будильник не будет врагом.</p>
                 </header>
 
                 <div class="narrow-container">
 
-                    <div class="big-clock" aria-live="polite">
+                    <div class="big-clock glass-panel" aria-live="polite">
                         <div class="clock-time" id="bigClock">—</div>
                     </div>
 
@@ -601,10 +700,16 @@
         </div>
 
         <div class="footer">
-            <div class="links">
-                <a href="https://github.com/idenbraun" target="_blank" rel="noopener">GitHub</a>
-                <a href="https://t.me/idendie" target="_blank" rel="noopener">t.me/idendie</a>
-                <a href="mailto:idenbraun@yandex.ru">idenbraun@yandex.ru</a>
+            <div class="footer-links">
+                <a href="https://github.com/idenbraun" target="_blank" rel="noopener" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+                <a href="https://t.me/idendie" target="_blank" rel="noopener" aria-label="Telegram">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                </a>
+                <a href="mailto:idenbraun@yandex.ru" aria-label="Email">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12.713l-11.985-9.713h23.97l-11.985 9.713zm-5.425-1.822l-6.575-5.329v12.501l6.575-7.172zm10.85 0l6.575 7.172v-12.501l-6.575 5.329zm-1.557 1.261l-3.868 3.135-3.868-3.135-8.11 8.848h23.956l-8.11-8.848z"/></svg>
+                </a>
             </div>
         </div>
     </div>
@@ -612,20 +717,6 @@
     <script>
         (function() {
             'use strict';
-
-            const starsContainer = document.getElementById('starsContainer');
-            for (let i = 0; i < 100; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.setProperty('--duration', (2 + Math.random() * 4) + 's');
-                star.style.setProperty('--delay', Math.random() * 5 + 's');
-                const size = 1 + Math.random() * 2;
-                star.style.width = size + 'px';
-                star.style.height = size + 'px';
-                starsContainer.appendChild(star);
-            }
 
             const FALL_ASLEEP_MIN = 15;
             const CYCLE_MIN = 90;
@@ -652,27 +743,20 @@
                 const nowTotal = now.getHours() * 60 + now.getMinutes();
                 let wakeTotal = wakeH * 60 + wakeM;
 
-                // Если целевое время меньше или равно текущему, значит, подъём завтра
                 if (wakeTotal <= nowTotal) {
                     wakeTotal += 24 * 60;
                 }
 
                 const results = [];
 
-                // Увеличили диапазон до 8 циклов (от 4.5 до 12 часов)
                 for (let cycles = 3; cycles <= 8; cycles++) {
                     const sleepDuration = cycles * CYCLE_MIN;
-                    
-                    // АБСОЛЮТНОЕ время отхода ко сну в минутах от начала "сегодняшних" суток.
-                    // Может быть > 1440, если это завтра.
                     const bedTimeAbsolute = wakeTotal - sleepDuration - FALL_ASLEEP_MIN;
 
-                    // ТИХАЯ ЛОГИКА: пропускаем время, которое уже прошло сегодня
                     if (bedTimeAbsolute < nowTotal) {
                         continue;
                     }
 
-                    // Время для отображения на карточке (в пределах 0-1439 минут)
                     const displayTime = bedTimeAbsolute % (24 * 60);
                     const bedH = Math.floor(displayTime / 60);
                     const bedM = displayTime % 60;
@@ -705,12 +789,10 @@
                         cycles, bedH, bedM, sleepH, sleepM, rating, desc,
                         timeStr: pad(bedH) + ':' + pad(bedM),
                         timeTotal: displayTime,
-                        bedTimeAbsolute: bedTimeAbsolute // Сохраняем для корректной сортировки
+                        bedTimeAbsolute: bedTimeAbsolute
                     });
                 }
 
-                // Сортировка по абсолютному времени наступления (от ближайшего к дальнему).
-                // Это гарантирует, что 23:50 сегодня (1430) будет перед 00:40 завтра (1480).
                 results.sort((a, b) => a.bedTimeAbsolute - b.bedTimeAbsolute);
                 return results;
             }
@@ -769,14 +851,11 @@
                 options.forEach(opt => {
                     opt.highlight = false;
                     if (mode === 'wake') {
-                        // Разница между абсолютным временем отхода ко сну и текущим временем
                         const diff = opt.bedTimeAbsolute - nowTotal;
-                        // Если до сна осталось от 0 до 30 минут
                         if (diff >= 0 && diff <= 30) {
                             opt.highlight = true;
                         }
                     } else if (mode === 'sleep') {
-                        // В режиме "Ложусь сейчас" подсвечиваем оптимальные 5 или 6 циклов
                         if (opt.cycles === 5 || opt.cycles === 6) {
                             opt.highlight = true;
                         }
@@ -800,9 +879,8 @@
 
                 highlightBestOption(options, currentMode);
 
-                // Защита от пустого экрана, если все варианты уже прошли
                 if (currentMode === 'wake' && options.length === 0) {
-                    optionsEl.innerHTML = `<div style="grid-column: 1/-1; color: var(--sleep-footer-text); font-size: 14px; padding: 20px; line-height: 1.5;">
+                    optionsEl.innerHTML = `<div style="grid-column: 1/-1; color: var(--text-secondary); font-size: 14px; padding: 24px; line-height: 1.6; background: var(--glass-bg); border-radius: 20px; border: 1px solid var(--glass-border); backdrop-filter: blur(12px);">
                         Для этого времени пробуждения сегодня уже поздно ложиться.<br>
                         Попробуйте вздремнуть (режим "Ложусь сейчас") или сдвиньте время подъёма.
                     </div>`;
@@ -815,11 +893,11 @@
                     const isHighlight = o.highlight;
 
                     if (isBest && isHighlight) {
-                        badgeText = currentMode === 'wake' ? '✨ идеально / ложись сейчас!' : '✨ идеально';
+                        badgeText = currentMode === 'wake' ? '✨ Идеально / ложись сейчас!' : '✨ Идеально';
                     } else if (isBest) {
-                        badgeText = '✨ идеально';
+                        badgeText = '✨ Идеально';
                     } else if (isHighlight) {
-                        badgeText = currentMode === 'wake' ? '⚡ ложись сейчас!' : '⚡ рекомендуется';
+                        badgeText = currentMode === 'wake' ? '⚡ Ложись сейчас!' : '⚡ Рекомендуется';
                     }
 
                     const badgeHTML = badgeText ? `<span class="card-badge ${isBest ? 'badge-best' : 'badge-highlight'}">${badgeText}</span>` : '';
@@ -905,7 +983,7 @@
                     if ('Notification' in window && Notification.permission === 'granted') {
                         new Notification('🌙 Пора ложиться!', {
                             body: 'Через 15 минут идеальное время для отхода ко сну',
-                            icon: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 512 512\'%3E%3Crect width=\'512\' height=\'512\' fill=\'%230a0a0a\' rx=\'64\'/%3E%3Ctext x=\'256\' y=\'320\' font-size=\'250\' text-anchor=\'middle\' fill=\'%23fff\' font-family=\'sans-serif\'%3E🌜%3C/text%3E%3C/svg%3E'
+                            icon: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 512 512\'%3E%3Crect width=\'512\' height=\'512\' fill=\'%23050508\' rx=\'64\'/%3E%3Ctext x=\'256\' y=\'320\' font-size=\'250\' text-anchor=\'middle\' fill=\'%23fff\' font-family=\'sans-serif\'%3E🌜%3C/text%3E%3C/svg%3E'
                         });
                     }
                 }, delay);
